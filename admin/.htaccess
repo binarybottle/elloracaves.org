@@ -1,0 +1,6 @@
+AuthUserFile /home/binarybottle/.htpasswd
+AuthName "Password protected"
+AuthType Basic
+<Limit GET POST>
+require user tristanbruck
+</Limit>

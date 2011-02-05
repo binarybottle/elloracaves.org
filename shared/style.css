@@ -1,0 +1,116 @@
+body {
+  font-family: Palatino, Verdana, Times New Roman, Helvetica, sans-serif;
+  font-size: 100%;
+  color: #eae2c4;
+}
+
+div.banner {
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  color: #eae2c4; #9C957C;
+}
+
+.map_overlay {
+  position: absolute;
+  left: -1px;
+  top: 1px;  
+}
+
+#title {
+  font-size: 150%;
+}
+#subtitle {
+  position: relative;
+  top: 2px;
+  left: 4px;
+  font-size: 90%;
+}
+#links {
+  position: relative;
+  top: 6px;
+  left: 4px;
+  font-size: 80%;
+}
+
+div.main {
+  color: white;
+  position: absolute;
+  left: 180px;
+  top: 220px;
+  font-size: 100%;
+}
+
+div.text_block {
+  position: absolute;
+  left: 180px;
+  width: 700px;
+  top: 220px;
+  font-size: 95%;
+  color: #eae2c4; #9C957C;
+}
+
+div.search {
+  position: absolute;
+  left: 465px;
+  top: 23px;
+  font-size: 75%;
+  color: #9C957C;
+  #background: black; 
+}
+.input_keywords {
+  color: #929687;
+  background: black; 
+  border: 1px solid #929687
+}
+.select_cave {
+  color: #929687; #9C957C;
+  background: black; 
+  border: 1px outset #929687
+} 
+.submit_query {
+  color: #9C957C;
+  background: black; 
+  border: 1px outset #929687
+} 
+
+.cave_name { 
+  color: #929687;
+  font-size: 120%;
+}
+
+.caption { 
+  color: #9C957C;
+  font-size: 90%;
+}
+.tiny { 
+  color: #9C957C;
+  font-size: 50%;
+}
+
+div.thumbnails { 
+  color: #9C957C;
+  font-size: 70%;
+}
+
+a:link {
+  color: #487a14;
+  #color: #4D6FAC; #487a14;
+  text-decoration: none;
+}
+a:visited {
+  color: #487a14;
+  #color: #4D6FAC; #487a14;
+  text-decoration:none;
+}
+a:hover {
+  color: #6ebd20;
+  #color: #0147FA; #6ebd20;
+  text-decoration:none;
+}
+a:active {
+  color: #6ebd20;
+  #color: #0147FA; #6ebd20;
+  text-decoration:none;
+}
+
