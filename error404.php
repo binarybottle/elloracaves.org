@@ -21,18 +21,18 @@ $default_plan_width = $scale*480;
 
 <title>Ellora Cave Temples</title>
 
-<?php include("./shared/banner.php"); ?>
+<?php include("./shared/banner_home.php"); ?>
 
-<div class="main">
+<div class="text_block">
 
 <table width="760" border="0" cellspacing="0" cellpadding="100">
  <tr>
   <td width="240" valign="top">
 
-I'm sorry, but that address doesn't exist.
+I'm sorry, but that address does not exist.
 <br>
 <br>
- Please try another address.
+ Please try <a href="http://www.elloracaves.org">again</a>.
 
   </td>
  </tr>

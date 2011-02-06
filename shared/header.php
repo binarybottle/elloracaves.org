@@ -14,11 +14,11 @@
   <meta name="dc.identifier" content="http://www.elloracaves.org">
   <meta name="dc.identifier" content="http://www.elloracaves.org">
   <link rel="stylesheet" type="text/css" href="./shared/style.css" />
-  <link rel="stylesheet" type="text/css" href="./shared/cave_numbers.css" />
 
 <script type="text/javascript" src="./shared/jquery-1.4.4.min.js"></script>
 
 <?php include("./shared/popup.js"); ?>
-<?php include("./shared/banner.php"); // Calls search.php ?>
+<?php include("./shared/banner_home.php"); // Calls search.php ?>
 
 </head>
+<?php flush(); ?>

@@ -29,9 +29,12 @@ jQuery(document).ready(function(){
 })
 
 <?php 
-/*
-  // Postload images:
-   //$("p.postload").text("The DOM is now loaded and can be manipulated.");
+
+// Preload images (top of the caves page -- plans, default images):
+$preload_plans = 1;
+$preload_default_cave = 1;
+
+if ($preload_plans==1) {
   $sqlPL = 'SELECT plan_image, plan_image2, plan_image3, image_file
             FROM images, caves, plans
             WHERE cave_ID = image_cave_ID 
@@ -39,26 +42,61 @@ jQuery(document).ready(function(){
             AND image_rank = 1
             AND plan_image_ID = image_ID';
   $resultPL = mysql_query($sqlPL) or die (mysql_error());
+  // Create JS array: Array('image_1.png', 'image_2.png', 'image_3.png');
+  $array_string = '';
+  $i0 = 0;
   while($rowPL = mysql_fetch_array($resultPL)){
-      echo '$("p.postload").load("'.$plan_dir.$rowPL["plan_image"].'");';
-      echo '$("p.postload").load("'.$plan_dir.$rowPL["plan_image2"].'");';
-      echo '$("p.postload").load("'.$plan_dir.$rowPL["plan_image3"].'");';
-      echo '$("p.postload").load("'.$image_dir.$rowPL["image_file"].'");';
-      echo '$("p.postload").load("'.$thumb_dir.$rowPL["image_file"].'");';
+      $i0 = $i0 + 1;
+      if ($i0 > 1) {
+        $array_string .= ',';
+      }
+      if (strlen($rowPL["plan_image"])>0) {
+        $array_string .= '"'.$plan_dir.$rowPL["plan_image"].'",';
+      }
+      if (strlen($rowPL["plan_image2"])>0) {
+        $array_string .= '"'.$plan_dir.$rowPL["plan_image2"].'",';
+      }
+      if (strlen($rowPL["plan_image3"])>0) {
+        $array_string .= '"'.$plan_dir.$rowPL["plan_image3"].'",';
+      }
+      if (strlen($rowPL["image_file"])>0) {
+        $array_string .= '"'.$image_dir.$rowPL["image_file"].'",';
+        $array_string .= '"'.$thumb_dir.$rowPL["image_file"].'"';
+      }
   }
+
+  if ($preload_default_cave==1) {
+    $sqlPL2 = 'SELECT image_file
+              FROM images
+              WHERE image_cave_ID = 10
+              AND image_rank = 1';
+    $resultPL2 = mysql_query($sqlPL2) or die (mysql_error());
+    while($rowPL2 = mysql_fetch_array($resultPL2)){
+        $array_string .= ',"'.$image_dir.$rowPL2["image_file"].'",';
+        $array_string .= '"'.$thumb_dir.$rowPL2["image_file"].'"';
+    }
+  }
+  ?>
   
-  $sqlPL2 = 'SELECT image_file
-            FROM images
-            WHERE image_cave_ID = 10
-            AND image_rank = 1';
-  $resultPL2 = mysql_query($sqlPL2) or die (mysql_error());
-  while($rowPL2 = mysql_fetch_array($resultPL2)){
-      echo '$("p.postload").load("'.$image_dir.$rowPL2["image_file"].'");';
-      echo '$("p.postload").load("'.$thumb_dir.$rowPL2["image_file"].'");';
-  }
-})
-*/
-?>
+  jQuery(document).ready(function(){
+  
+    // Postload images:
+    $(window).bind('load', function() {
+          var preload = new Array(<?php echo $array_string; ?>);
+          var img = document.createElement('img');
+          $(img).bind('load', function() {
+                  if(preload[0]) {
+                          this.src = preload.shift();
+                  /*}  else {*/
+                  /* all images have been loaded */
+                  }
+          }).trigger('load');
+    });
+  });
+  
+<?php } ?>
 
 </script>
 </head>
+<?php flush(); ?>
+

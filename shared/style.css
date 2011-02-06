@@ -4,13 +4,18 @@ body {
   color: #eae2c4;
 }
 
-div.banner {
+.banner {
   position: absolute;
   left: 20px;
   top: 20px;
   color: #eae2c4; #9C957C;
 }
 
+.home_image {
+  position: absolute;
+  left: 180px;
+  top: 300px;  
+}
 .map_overlay {
   position: absolute;
   left: -1px;
@@ -33,64 +38,92 @@ div.banner {
   font-size: 80%;
 }
 
-div.main {
-  color: white;
-  position: absolute;
-  left: 180px;
-  top: 220px;
-  font-size: 100%;
-}
-
-div.text_block {
+.text_block {
   position: absolute;
   left: 180px;
   width: 700px;
   top: 220px;
   font-size: 95%;
-  color: #eae2c4; #9C957C;
 }
 
-div.search {
+.search {
   position: absolute;
   left: 465px;
   top: 23px;
   font-size: 75%;
-  color: #9C957C;
-  #background: black; 
 }
 .input_keywords {
-  color: #929687;
+  color: #eae2c4;
   background: black; 
   border: 1px solid #929687
 }
 .select_cave {
-  color: #929687; #9C957C;
+  color: #eae2c4;
   background: black; 
   border: 1px outset #929687
 } 
 .submit_query {
-  color: #9C957C;
+  color: #eae2c4;
   background: black; 
   border: 1px outset #929687
 } 
 
-.cave_name { 
-  color: #929687;
-  font-size: 120%;
+.miniplans {
+  position: absolute;
+  left: 10px;
+  top: 300px;
 }
-
-.caption { 
-  color: #9C957C;
+.miniplan_title {
+  position: absolute;
+  left: 35px;
   font-size: 90%;
 }
+
+.plan {
+  position: absolute;
+  top: 270px;
+}
+.plan_title {
+  position: absolute;
+  left: 270px;
+  top: 760px;
+  font-size: 110%;
+}
+.no_plan_title {
+  position: absolute;
+  left: 150px;
+  top: 500px;
+  font-size: 110%;
+}
+
+.slidebox {
+  position: absolute;
+  top: 220px;
+  left: 530px;
+}
+#slides {
+  position: absolute;
+  bottom: 0px;
+}
+#slides_dummy {
+  position: absolute;
+  bottom: 0px;
+}
+.caption {
+  position: absolute;
+  bottom: 0px;
+  left: 370px;
+  font-size: 85%;
+}
+
 .tiny { 
-  color: #9C957C;
   font-size: 50%;
 }
 
-div.thumbnails { 
-  color: #9C957C;
-  font-size: 70%;
+.thumbnails {
+  position: absolute;
+  left: 100px;
+  font-size: 90%;
 }
 
 a:link {

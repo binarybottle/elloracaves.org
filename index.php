@@ -18,6 +18,8 @@ include("./shared/header_home.php");
 
 <?php include("./shared/banner_home.php"); ?>
 
+<img class="home_image" align="center" src="http://media.elloracaves.org/images/decor/home_c5_H7.jpg" width="840px" />
+
 <div class="text_block">
 
 <b>About this site:</b>
@@ -34,10 +36,12 @@ in December, 2008, by our sponsor
 Photographs and website design: <a href="http://www.binarybottle.com" onClick="return popup(this,'binarybottle')">Arno Klein</a><br />
 Descriptions accompanying photographs are based on the original field notes of Professor Spink.
 <br /><br />
-<h2 style="position:absolute; left:225px;"><a href="./trove.php">ENTER THE CAVES</a></h2>
-
-<img align="center" src="./images/decor/home_c5_H7.jpg" width="830px" />
-
+<h2 style="position:absolute; left:225px;"><a href="./caves.php">ENTER THE CAVES</a></h2>
+<div style="position:relative; top:550px;">
+NOTE: This is a work in progress! <br />
+We are busy with ground plan preparations, data entry, <br />
+and are preparing to embark on another trip to the caves to check all of our entries...
+</div>
 </div>
 
 <?php include("./shared/footer.php"); ?>
