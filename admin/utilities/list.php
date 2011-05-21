@@ -1,7 +1,7 @@
 <?php
 
  // Log into MySQL server
-    require_once('../../db/elloracaves_db.php');
+    require_once('../../../db/elloracaves_db.php');
 
 //    $query1  = "SELECT * FROM images ORDER BY cave_ID";
     $query1  = "SELECT distinct cave_ID FROM images ORDER BY cave_ID";

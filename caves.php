@@ -3,8 +3,6 @@ $image_dir   = "http://media.elloracaves.org/images/caves_360px/";
 $thumb_dir   = "http://media.elloracaves.org/images/caves_thumbs/";
 $plan_dir    = "http://media.elloracaves.org/images/plans/";
 
-$table_height = 570;
-$table_width = 1000;
 $image_width = 360;
 $scale_images = 1;
 $scale_plans = 0.75;
@@ -42,6 +40,7 @@ if (strlen(trim($searchstring))==0 || strlen($searchimage)>0) {
     echo '<img src="'.$plan_dir.$plan_image.'" width="'.$miniplan_width.'"/><br />';
     echo '<div class="miniplan_title">floor 1</div><br /><br /><br />';
   }
+/*
   if (strlen($plan_image2)>0) {
     echo '<img src="'.$plan_dir.$plan_image2.'" width="'.$miniplan_width.'"/><br />';
     echo '<div class="miniplan_title">floor 2</div><br /><br /><br />';
@@ -50,6 +49,7 @@ if (strlen(trim($searchstring))==0 || strlen($searchimage)>0) {
     echo '<img src="'.$plan_dir.$plan_image3.'" width="'.$miniplan_width.'"/><br />';
     echo '<div class="miniplan_title">floor 3</div><br /><br /><br />';
   }
+*/
   echo '</div>';
 
   // If there is a plan image
@@ -59,30 +59,65 @@ if (strlen(trim($searchstring))==0 || strlen($searchimage)>0) {
     echo '<img src="'.$plan_dir.$plan_image.'" width="'.$plan_width.'" class="plan" style="position:absolute; left:'.$offset_plan.'px;"/>';
     echo '<span class="plan_title">'.$cave_name.'</span>';
 
+$plan_height = 1.7 * $plan_width;
+
     // Markers on ground plan
-    echo '<div style="position:absolute; left:'.$offset_plan.'px;">';
-    echo '<dl id="switches">'; 
+    echo '<script type="text/javascript"> 
+           var paper = Raphael('.($offset_plan+3).',10,'.$plan_width.','.$plan_height.');
+          </script>
+    ';
+    echo '<div style="position:absolute; left:'.$offset_plan.'px;">
+          <dl id="switches">
+          ';
     foreach ($Images as &$row) {
-        if ($row['image_plan_x']>0 && $row['image_plan_y']>0) {
+        $X = explode(",",$row['image_plan_x']);
+        $Y = explode(",",$row['image_plan_y']);
+
+        // If there is at least one pair of coordinates for an image:
+        if ($X[0]>0 && $Y[0]>0) {
+          // First marker:
           if ($row['image_ID']==$searchimage) {
             echo '<dt class = "active">';
             $marker_state = 'off';
-            $marker_size = 10;
+            $marker_size = 8;
           } else {
             echo '<dt>';
             $marker_state = 'on';
-            $marker_size = 9;
+            $marker_size = 6;
           }
+          $x0 = $offsetX_marker + $scale_plans*$X[0];
+          $y0 = $offsetY_marker + $scale_plans*$Y[0];
           echo '<img src="http://media.elloracaves.org/images/decor/marker_'.$marker_state.'.png"
-                id="marker'.$row["image_ID"].'"
+                id="marker'.$row["image_ID"].'" rel="target'.$row["image_ID"].'"
                 border="0" width="'.$marker_size.'" height="'.$marker_size.'"
-                style="position:absolute;
-                       top:'.($offsetY_marker+$scale_plans*$row['image_plan_y']).'px;
-                       left:'.($offsetX_marker + $scale_plans*$row['image_plan_x']).'px;" />';
-          echo '</dt>';
+                style="position:absolute; top:'.$y0.'px; left:'.$x0.'px;" />
+                ';
+
+          // If there is a second pair of coordinates for an image:
+          if ($X[1]>0 && $Y[1]>0) {
+            $x1 = $offsetX_marker + $scale_plans*$X[1];
+            $y1 = $offsetY_marker + $scale_plans*$Y[1];
+
+            // Draw lines of sight:
+            echo '<script type="text/javascript"> 
+             var line = paper.path("M'.$x0.' '.$y0.'L'.$x1.' '.$y1.'");
+             line.attr({stroke: "yellow", opacity: '.$opacity.'});
+            </script>
+            ';
+
+            // Second marker:
+            $radius = 2;
+            $opacity = 0.6;
+            echo '<script type="text/javascript">
+             var circle = paper.circle('.$x1.','.$y1.','.$radius.');
+             circle.attr({fill: "yellow", opacity: '.$opacity.'});
+            </script>
+            ';
+          }
         }
     }
-    echo '</dl></div>';
+    echo '</dl></div>
+    ';
 
     // Main images on the plan
     echo '<div class="slidebox" style="height:'.$slide_height.'px;">';
@@ -90,7 +125,9 @@ if (strlen(trim($searchstring))==0 || strlen($searchimage)>0) {
     foreach ($Images as &$row) {
       //$image_size = getimagesize($image_dir.$row["image_file"]);
       //$image_height = $scale_images * $image_size[1];
-      if ($row['image_plan_x']>0 && $row['image_plan_y']>0) {
+      $X = explode(",",$row['image_plan_x']);
+      $Y = explode(",",$row['image_plan_y']);
+      if ($X[0]>0 && $Y[0]>0) {
         if ($row['image_ID']==$start_image_ID) { //$searchimage) {
           echo '<div id="image_'.$row["image_ID"].'" class="active">';
           echo '<img src="'.$image_dir.$row["image_file"].'" width="'.$image_width.'"/>';
@@ -99,7 +136,6 @@ if (strlen(trim($searchstring))==0 || strlen($searchimage)>0) {
           echo '<br /><br /><span class="tiny">'.$row["image_ID"].'</span>';
           echo '</span>';
           echo '</div>';
-          //break;
         } else {
           echo '<div id="image_'.$row["image_ID"].'">';
           echo '<img src="'.$image_dir.$row["image_file"].'" width="'.$image_width.'"/>';
@@ -118,7 +154,9 @@ if (strlen(trim($searchstring))==0 || strlen($searchimage)>0) {
     echo '<div class="slidebox" style="height:'.$slide_height.'px;">';
     echo '<div id="slides_dummy">';
     foreach ($Images as &$row) {
-      if ($row['image_plan_x']<=0 || $row['image_plan_y']<=0) {
+      $X = explode(",",$row['image_plan_x']);
+      $Y = explode(",",$row['image_plan_y']);
+      if ($X[0]<=0 || $Y[0]<=0) {
         if ($row['image_ID']==$searchimage) {
           echo '<div id="image_'.$row["image_ID"].'" class="active">';
           echo '<img src="'.$image_dir.$row["image_file"].'" width="'.$image_width.'"/>';

@@ -1,11 +1,11 @@
 <?php
 
  // Log into MySQL server
-    require_once('../../db/elloracaves_db.php');
+    require_once('../../../db/elloracaves_db.php');
 
     $ID1 = 4610;
     $ID2 = 5217;
-    $cave_ID = '16';
+    $image_cave_ID = '16';
 
     for ( $counter = $ID1; $counter <= $ID2; $counter += 1) {
 

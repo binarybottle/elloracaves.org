@@ -24,21 +24,25 @@ include("./shared/header_home.php");
 
 <b>About this site:</b>
 <br /><br />
-Dr. Deepanjana Klein of Christie's, Professor Emeritus Walter Spink of the University of Michigan, <br />
-and Arno Klein of Columbia University have brought to you the first comprehensive documentation<br />
-of the Ellora cave temples.  Scholars and students are welcome to use this online resource, <br />
+Dr. Deepanjana Klein of Christie's, Professor Emeritus Walter Spink of the University of Michigan,
+and Arno Klein of Columbia University have brought to you the first comprehensive documentation
+of the Ellora cave temples.  Scholars and students are welcome to use this online resource,
 which will be incorporated in a book.  It was 
 <a href="http://www.artstor.org/news/n-html/an-081204-ellora.shtml" onClick="return popup(this,'Announcement')">announced</a> 
 in December, 2008, by our sponsor 
 <a href="http://www.artstor.org" onClick="return popup(this,'ArtStor')">ArtStor</a>.
 <br />
 <br />
-Photographs and website design: <a href="http://www.binarybottle.com" onClick="return popup(this,'binarybottle')">Arno Klein</a><br />
+The thousands of photographs and website design: <a href="http://www.binarybottle.com" onClick="return popup(this,'binarybottle')">Arno Klein</a>
+<br />
 Descriptions accompanying photographs are based on the original field notes of Professor Spink.
 <br /><br />
 <h2 style="position:absolute; left:225px;"><a href="./caves.php">ENTER THE CAVES</a></h2>
 <div style="position:relative; top:550px;">
-NOTE: This is a work in progress! <br />
+<br />
+<font color="red">NOTE: Internet Explorer is not supported.</font>
+<br /><br />
+Also, this is a work in progress! <br />
 We are busy with ground plan preparations, data entry, <br />
 and are preparing to embark on another trip to the caves to check all of our entries...
 </div>

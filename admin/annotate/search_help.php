@@ -1,5 +1,5 @@
-<?php include_once("./shared/header_start.php"); ?>
-<script type="text/javascript" src="./shared/popups.js"></script>
+<?php include_once("../shared/header_start.php"); ?>
+<script type="text/javascript" src="../shared/popups.js"></script>
 </head>
 <body class="home">
 
@@ -29,7 +29,7 @@
 <!-- Footer -->
 <div class="footer_home">
 
- <?php include_once("./shared/footer.php"); ?>
+ <?php include_once("../shared/footer.php"); ?>
 
 </div>
 

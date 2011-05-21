@@ -34,6 +34,8 @@ function searchForm_admin()
   echo 'Start: <input type="text" size="6" name="start" value="'.$range_start.'" /> ';
   echo '&nbsp;&nbsp; End: <input type="text" size="6" name="stop" value="'.$range_stop.'" /></i></font> ';
 
+  echo '<br /><br />';
+
   echo '<input type="submit" value="Search" />';
   echo '</form> <br />';
 

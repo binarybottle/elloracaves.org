@@ -1,9 +1,9 @@
 <?php 
  $image_repository = "http://media.elloracaves.org/images/caves_360px/";
- include_once("../../db/elloracaves_db.php");
+ include_once("../../../db/elloracaves_db.php");
  include_once("../shared/header_start.php"); 
 
- $limit = 50;
+ $limit = 500;
 ?>
 
 <script type="text/javascript" src="../shared/popups.js"></script>
@@ -79,9 +79,9 @@
                break;
            }
 
-           $sql = "SELECT image_ID, image_cave_ID, image_medium, image_subject,
+           $sql = "SELECT image_ID, image_cave_ID, image_plan_ID, image_medium, image_subject,
                           image_motifs, image_description, image_file, image_date,
-                          image_light, image_notes, image_rank, image_rotate,
+                          image_notes, image_rank, image_rotate,
                    MATCH(image_medium, image_subject, image_motifs,
                          image_description, image_notes)
                    AGAINST ('$searchstring'" . $bool . ") AS score FROM images
@@ -124,17 +124,23 @@
          $image_file      = $row->image_file;
          $image_rank      = $row->image_rank;
          $image_desc      = $row->image_description;
-         $cave_name       = $row->cave_name;
-         $plan_image      = $row->plan_image;
-         $plan_width      = $row->plan_width;
+         $image_plan_ID   = $row->image_plan_ID;
 
          $image_medium    = $row->image_medium;
          $image_subject   = $row->image_subject;
          $image_motifs    = $row->image_motifs;
          $image_date      = $row->image_date;
-         $image_light     = $row->image_light;
          $image_notes     = $row->image_notes;
          $image_rotate    = $row->image_rotate;
+
+         $sql_loop = "SELECT plan_floor FROM plans WHERE plan_ID = '".$image_plan_ID."'";
+         $result_loop = mysql_query($sql_loop) or die (mysql_error());
+         if ($result_loop) {
+             $row_loop = mysql_fetch_row($result_loop);
+             $plan_floor = $row_loop[0];
+         } else {
+             $plan_floor = 1;
+         }
 
       // Line
          echo '<hr size="1" />';
@@ -157,6 +163,26 @@
          echo '<input type="hidden" name="update_image_ID'.$i.'" value="'.$image_ID.'">';
          echo '<table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td>';
          echo 'Cave ID:     <br /><input type="text" size="20"  name="update_image_cave_ID'.$i.'"     value="'.$image_cave_ID      .'">';
+         echo '</td><td>';
+
+         if ($plan_floor==1) {
+            $floor1 = 'checked'; $floor2 = ''; $floor3 = '';
+         }
+         elseif ($plan_floor==2) {
+            $floor2 = 'checked'; $floor1 = ''; $floor3 = '';
+         }
+         elseif ($plan_floor==3) {
+            $floor3 = 'checked'; $floor1 = ''; $floor2 = '';
+         }
+         echo 'Floor: ';
+         echo '&nbsp;&nbsp;&nbsp;&nbsp;';
+         echo '1  <input type="radio" name="update_floor'.$i.'" value="1" '.$floor1.'>';
+         echo '&nbsp;&nbsp;&nbsp;&nbsp;';
+         echo '2  <input type="radio" name="update_floor'.$i.'" value="2" '.$floor2.'>';
+         echo '&nbsp;&nbsp;&nbsp;&nbsp;';
+         echo '3  <input type="radio" name="update_floor'.$i.'" value="3" '.$floor3.'>';
+         echo '</i>';
+
          echo '</td><td>';
          echo 'Medium:      <br /><input type="text" size="20" name="update_image_medium'.$i.'"     value="'.$image_medium      .'"><br />';
          echo '</td></tr></table>';
@@ -189,7 +215,9 @@
          echo '2  <input type="radio" name="update_image_rotate'.$i.'" value="2" '.$rot2.'>';
          echo '&nbsp;&nbsp;&nbsp;&nbsp;';
          echo '3  <input type="radio" name="update_image_rotate'.$i.'" value="3" '.$rot3.'>';
-         echo '</i></div>';
+         echo '</i>';
+
+         echo '   </div>';
          echo '   </td>';
          echo '  </tr>';
          echo ' </table>';

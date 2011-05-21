@@ -1,11 +1,11 @@
 <?php
-include("../../db/elloracaves_db.php");
+include("../../../db/elloracaves_db.php");
 
 // Image repository
-   $image_repository = "./images/caves/";
+   $image_repository = "http://media.elloracaves.org/images/caves_360px/";
 	
 // Search form
-   include_once("./shared/searchForm.php");
+   include_once("../shared/searchForm.php");
 
 // Create the navigation switch
    $cmd = (isset($_GET['cmd']) ? $_GET['cmd'] : '');
@@ -47,7 +47,7 @@ include("../../db/elloracaves_db.php");
            }
            $sql = "SELECT image_ID, image_cave_ID, image_medium, image_subject,
                           image_motifs, image_description, image_file, image_date,
-                          image_light, image_notes, image_rank,
+                          image_notes, image_rank,
                    MATCH(image_medium, image_subject, image_motifs, image_description,
                          image_notes)
                    AGAINST ('$searchstring'" . $bool . ") AS score FROM images
@@ -90,7 +90,6 @@ include("../../db/elloracaves_db.php");
        //$image_medium =       $row->image_medium;
        //$image_motifs =       $row->image_motifs;
        //$image_date =         $row->image_date;
-       //$image_light =        $row->image_light;
        //$image_rank =         $row->image_rank;
 
       // Line

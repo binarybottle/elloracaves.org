@@ -44,15 +44,12 @@ switch($cmd)
     if (strlen(trim($searchstring))==0 && strlen(trim($searchcave))>0) {
       $sql = "SELECT image_ID, image_cave_ID, image_file, image_rank,
              image_description, cave_name, 
-             plan_ID, plan_image_ID, plan_width, 
-             plan_image, plan_image2, plan_image3,
-             image_plan_x, image_plan_y,
-             image_plan2_x, image_plan2_y,
-             image_plan3_x, image_plan3_y
+             plan_ID, plan_cave_ID, plan_image_ID, plan_width, plan_image,
+             image_plan_x, image_plan_y
              FROM images, caves, plans
              WHERE cave_ID = '".$searchcave."'
              AND image_cave_ID = cave_ID
-             AND plan_ID = cave_ID
+             AND plan_cave_ID = cave_ID
              AND image_rank = 1
              ORDER BY image_file ASC
              LIMIT ".$limit;
@@ -61,11 +58,19 @@ switch($cmd)
       $Images = array();
       $i=0;
       while($row = mysql_fetch_array($result)){
-        $Images[$i] = $row;
+        //print_r($row);
+// CAVE 10 IMAGES REPEAT!!!!
+        if ($searchcave==10) {
+          if ($i % 2 == 0) {
+            $Images[$i] = $row;
+          }
+        } else {
+            $Images[$i] = $row;
+        }
         $i = $i + 1;
       }
+      //print_r($Images);
     }
-    
     // All images described with provided keywords (optionally for selected cave) 
     elseif (strlen(trim($searchstring))>0 && strlen(trim($searchcave))>=0) {
       if (strlen(trim($searchcave))>0) {
@@ -75,10 +80,8 @@ switch($cmd)
       }
       $sql = "SELECT image_ID, image_cave_ID, image_medium, image_subject,
                      image_motifs, image_description, image_file, image_date,
-                     image_light, image_notes, image_rank,
+                     image_notes, image_rank,
                      image_plan_x, image_plan_y,
-                     image_plan2_x, image_plan2_y,
-                     image_plan3_x, image_plan3_y,
               MATCH(image_medium, image_subject, image_motifs, image_description,
                      image_notes)
               AGAINST ('$searchstring'" . $bool . ") AS score FROM images
@@ -106,9 +109,8 @@ switch($cmd)
 // Cave- and plan-dependent parameters
 $cave_name = $Images[0]['cave_name'];
 $plan_image = $Images[0]['plan_image'];
-$plan_image2 = $Images[0]['plan_image2'];
-$plan_image3 = $Images[0]['plan_image3'];
 $plan_image_ID = $Images[0]['plan_image_ID'];
+$plan_cave_ID = $Images[0]['plan_cave_ID'];
 $plan_width = $scale_plans*$Images[0]['plan_width'];
 if ($plan_width <= 0) {
   $plan_width = $default_plan_width;
@@ -118,20 +120,19 @@ $image_width = $scale_images * $image_width;
 // If given image_ID, find other information to include plan
 if (strlen($searchimage)>0) {
   $start_image_ID = $searchimage;
-  $sql_temp = 'SELECT cave_name, plan_image_ID, plan_width,
-                      plan_image, plan_image2, plan_image3
-               FROM images, caves, plans
+  $sql_temp = 'SELECT cave_name, plan_image_ID, plan_cave_ID, 
+               plan_width, plan_image 
+               FROM images, caves, plans 
                WHERE cave_ID = image_cave_ID 
-               AND plan_ID = cave_ID
+               AND plan_cave_ID = cave_ID 
                AND image_rank = 1
                AND image_ID = "'.$start_image_ID.'"';
   $result = mysql_query($sql_temp) or die (mysql_error());
   while($row = mysql_fetch_array($result)){
     $cave_name = $row['cave_name'];
     $plan_image_ID = $row['plan_image_ID'];
+    $plan_cave_ID = $row['plan_cave_ID'];
     $plan_image = $row['plan_image'];
-    $plan_image2 = $row['plan_image2'];
-    $plan_image3 = $row['plan_image3'];
     $plan_width = $scale_plans*$row['plan_width'];
     if ($plan_width <= 0) {
       $plan_width = $default_plan_width;

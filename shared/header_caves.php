@@ -17,6 +17,7 @@
   <link rel="stylesheet" type="text/css" href="./shared/cave_numbers.css" />
 
 <script type="text/javascript" src="./shared/jquery-1.4.4.min.js"></script>
+<script language="javascript" type="text/javascript" src="./shared/raphael-min.js"></script> 
 
 <?php include("./shared/popup.js"); ?>
 <?php include("./shared/banner_caves.php"); // Calls search.php ?>

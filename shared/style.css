@@ -74,7 +74,7 @@ body {
   top: 300px;
 }
 .miniplan_title {
-  position: absolute;
+  position: relative;
   left: 35px;
   font-size: 90%;
 }

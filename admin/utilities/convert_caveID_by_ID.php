@@ -1,7 +1,7 @@
 <?php
 
  // Log into MySQL server
-    require_once('../../db/elloracaves_db.php');
+    require_once('../../../db/elloracaves_db.php');
 
     $ID1 = ;
     $ID2 = ;
@@ -17,7 +17,7 @@
           while ($row = mysql_fetch_array($result1, MYSQL_ASSOC)) {
 
                 $query2  = "UPDATE images SET ";
-                $query2 .= "cave_ID = '".$cave_ID."', ";
+                $query2 .= "image_cave_ID = '".$cave_ID."', ";
                 $query2 .= "medium = 'rock-cut' ";
                 $query2 .= " WHERE ID=".$counter;
 

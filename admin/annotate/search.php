@@ -1,8 +1,8 @@
 <?php 
- include_once("./shared/header_start.php"); 
+ include_once("../shared/header_start.php"); 
 ?>
 
-<script type="text/javascript" src="./shared/popups.js"></script>
+<script type="text/javascript" src="../shared/popups.js"></script>
 </head>
 <body class="search">
 

@@ -1,6 +1,6 @@
 <?php
 include("../db/elloracaves_db.php");
-include("./shared/header.php");
+include("./shared/header_caves.php");
 
 $image_dir   = "http://media.elloracaves.org/images/caves/";
 $thumb_dir   = "http://media.elloracaves.org/images/caves_thumbs/";
@@ -21,16 +21,16 @@ $default_plan_width = $scale*480;
 
 <title>Ellora Cave Temples</title>
 
-<?php include("./shared/banner.php"); ?>
-
 <div class="text_block">
+<font color="red">NOTE: Internet Explorer is not supported.</font>
+<br /><br /><br />
 <b>Search help:</b>
 <br /><br />
 Anything <font color="#487a14">green</font> is a link and can be clicked or moused over.<br />
 <br />
 There are two ways to search for images:<br />
-1. Click on a cave number on the map above to view all images taken of that cave.<br />
-2. At the top right, type in <b>Keywords</b> and/or select a <b>Cave</b> from the menu, then click on "<b>Search</b>".
+1. Click on a cave number on the map above to view images of that cave.<br />
+2. Or, type in <b>Keywords</b> and/or select a <b>Cave</b> from the menu, then click "<b>Search</b>".
  <br />
  <br />
  <i>Keyword examples:</i><br />

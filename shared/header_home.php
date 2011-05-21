@@ -25,7 +25,7 @@
 
 // Fade banner image to 0% when the page loads
 jQuery(document).ready(function(){
-   $(".map_overlay").fadeOut(20000);
+   $(".map_overlay").fadeOut(5000);
 })
 
 <?php 
@@ -35,7 +35,7 @@ $preload_plans = 1;
 $preload_default_cave = 1;
 
 if ($preload_plans==1) {
-  $sqlPL = 'SELECT plan_image, plan_image2, plan_image3, image_file
+  $sqlPL = 'SELECT plan_image, image_file
             FROM images, caves, plans
             WHERE cave_ID = image_cave_ID 
             AND plan_ID = cave_ID
@@ -52,12 +52,6 @@ if ($preload_plans==1) {
       }
       if (strlen($rowPL["plan_image"])>0) {
         $array_string .= '"'.$plan_dir.$rowPL["plan_image"].'",';
-      }
-      if (strlen($rowPL["plan_image2"])>0) {
-        $array_string .= '"'.$plan_dir.$rowPL["plan_image2"].'",';
-      }
-      if (strlen($rowPL["plan_image3"])>0) {
-        $array_string .= '"'.$plan_dir.$rowPL["plan_image3"].'",';
       }
       if (strlen($rowPL["image_file"])>0) {
         $array_string .= '"'.$image_dir.$rowPL["image_file"].'",';

@@ -13,4 +13,4 @@
   <meta name="dc.format" content="text/html"> 
   <meta name="dc.identifier" content="http://www.elloracaves.org">
   <meta name="dc.identifier" content="http://www.elloracaves.org">
-  <link rel="stylesheet" type="text/css" href="./shared/style.css" />
+  <link rel="stylesheet" type="text/css" href="http://www.elloracaves.org/admin/shared/style.css" />

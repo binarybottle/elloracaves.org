@@ -51,13 +51,13 @@ div.banner {
 	    color: #9C957C;
 }
 input {
-        background-color: #000000;
-        color: #999999;
+        #background-color: #000000;
+        #color: #999999;
         #color: #C0C0C0;
 }
 select {
-        background-color: #000000;
-        color: #999999;
+        #background-color: #000000;
+        #color: #999999;
 }
 
 .cave_menu {
@@ -69,28 +69,28 @@ select {
         position:  absolute;
         left:      471px;
         top:       0px;
-        background-color: #000000;
+        #background-color: #000000;
         font-size: 90%;
-        color: #999999;
+        #color: #999999;
         #color: #C0C0C0;
 }
 .search_form_select {
         position:  absolute;
         left:      282px;
         top:       0px;
-        background-color: #000000;
+        #background-color: #000000;
         border-color: #000000;
         font-size: 90%;
-        color: #999999;
+        #color: #999999;
 }
 .search_button {
         position:  absolute;
         left:      564px;
         top:       42px;
-        background-color: #000000;
+        #background-color: #000000;
         border-color: #000000;
         font-size: 80%;
-        color: #999999;
+        #color: #999999;
 }
 .search_help {
         font-size: 90%;

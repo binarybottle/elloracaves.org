@@ -1,7 +1,7 @@
 <?php
 
  // Log into MySQL server
-    require_once('../../db/elloracaves_db.php');
+    require_once('../../../db/elloracaves_db.php');
 
     $filepath = '_CAV';
     $cave_ID = 'Misc';
@@ -11,7 +11,7 @@
     for ( $counter = $ID1; $counter <= $ID2; $counter += 1) {
 
         $query2  = "UPDATE images SET ";
-        $query2 .= "cave_ID = '".$cave_ID."' ";
+        $query2 .= "image_cave_ID = '".$cave_ID."' ";
 
         if ($counter<1000) {
           $query2 .= " WHERE image_file='$filepath"."0"."$counter.jpg'";
