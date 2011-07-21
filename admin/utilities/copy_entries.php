@@ -1,8 +1,8 @@
 <?php
 
 $table = "images";
-$field_source = "image_cave_ID";
-$field_target = "image_plan_ID";
+$field_source = "image_ID";
+$field_target = "image_master_ID";
 $ID_name = "image_ID";
 
 // Log into MySQL server

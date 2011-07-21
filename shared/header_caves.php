@@ -24,12 +24,34 @@
 
 <script type="text/javascript">
 
- jQuery(document).ready(function(){
- 
   // Rollover markers in cave plans
-  <?php
+<?php
+/*
     foreach ($Images as &$row) {
-          
+      echo '$(img#marker'.$row["image_ID"].').mouseenter(function (){
+        this.attr({fill: "red"});
+      });';
+*/
+/*
+      function() {
+        circle.show();
+      }, 
+      function() {
+        circle.hide();
+      });';
+*/
+//    }
+?>
+
+</script>
+
+<script type="text/javascript">
+
+ jQuery(document).ready(function(){
+
+<?php 
+/*
+    foreach ($Images as &$row) {
       echo '$("img#marker'.$row["image_ID"].'").hover(
       function() {
         $(this).attr("src","http://media.elloracaves.org/images/decor/marker_on.png");
@@ -37,8 +59,7 @@
       function() {
         $(this).attr("src","http://media.elloracaves.org/images/decor/marker_off.png");
       });';
-    }
-
+*/
     // Postload images:
     if ($postload==1 && strlen($searchcave)>0) {
       $sqlPL = 'SELECT image_file
@@ -57,8 +78,7 @@
           $array_string .= '"'.$image_dir.$rowPL["image_file"].'",';
           $array_string .= '"'.$thumb_dir.$rowPL["image_file"].'"';
       }
-      ?>
-
+?>
       // Postload images:
       jQuery(document).ready(function(){
         $(window).bind('load', function() {
@@ -67,15 +87,12 @@
               $(img).bind('load', function() {
                       if(preload[0]) {
                               this.src = preload.shift();
-                      /*}  else {*/
-                      /* all images have been loaded */
                       }
               }).trigger('load');
         });
       });
-
   <?php } ?>
-  
+
   // Make active images appear
   // (http://stackoverflow.com/questions/34536/how-do-you-swap-divs-on-mouseover-jquery)
   switches = $('#switches > dt');
@@ -89,23 +106,6 @@
      $(this).addClass('active');
      $(this).data('slide').addClass('active');
    });
-   <?php 
-   /*
-   // Goes with the following within the HTML:
-   <dl id="switches">
-    <dt class="active">First slide</dt>
-    <dt>Second slide</dt>
-    <dt>Third slide</dt>
-    <dt>Fourth slide</dt>
-   </dt>
-   <div id="slides">
-    <div class="active">Well well.</div>
-    <div>Oh no!</div>
-    <div>You again?</div>
-    <div>I'm gone!</div>
-   </div>
-   */
-   ?>
  });
 
 </script>

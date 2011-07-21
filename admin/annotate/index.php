@@ -120,11 +120,14 @@
       while($row = mysql_fetch_object($result))
       {
          $image_ID        = $row->image_ID;
+         $master_ID       = $row->image_master_ID;
          $image_cave_ID   = $row->image_cave_ID;
          $image_file      = $row->image_file;
          $image_rank      = $row->image_rank;
          $image_desc      = $row->image_description;
          $image_plan_ID   = $row->image_plan_ID;
+         $image_plan_x    = $row->image_plan_x;
+         $image_plan_y    = $row->image_plan_y;
 
          $image_medium    = $row->image_medium;
          $image_subject   = $row->image_subject;
@@ -152,8 +155,8 @@
          echo '<table width="800" border="0" cellspacing="0" cellpadding="5">';
          echo ' <tr>';
          echo '  <td width="240">';
-         echo '   <img src="' . $image_repository . $image_file . '" height="240"></a>';
-         echo '   <span class="font80">'.$image_ID.': '.$image_file.'</span>';
+         echo '   <img src="' . $image_repository . $image_file . '" height="240"></a><br />';
+         echo '   <span class="font80">ID: '.$image_ID.'&nbsp;&nbsp; file: '.$image_file.'</span>';
          echo '  </td>';
          echo '  <td width="560">';
 
@@ -188,8 +191,7 @@
          echo '</td></tr></table>';
          echo 'Subject:     <br /><input type="text" size="65" name="update_image_subject'.$i.'"    value="'.$image_subject     .'"><br />';
          echo 'Motifs:      <br /><input type="text" size="65" name="update_image_motifs'.$i.'"     value="'.$image_motifs      .'"><br />';
-         echo 'Description: <br /><textarea cols="75" rows="3" name="update_image_description'.$i.'">'   
-                                                                          .$description               .'</textarea><br />';
+         echo 'Description: <br /><textarea cols="75" rows="3" name="update_image_description'.$i.'">'.$image_desc.'</textarea><br />';
          echo 'Image rank:        <input type="text" size="2"  name="update_image_rank'.$i.'"       value="'.$image_rank  .'">';
 
          if ($image_rotate==0) {
@@ -215,6 +217,10 @@
          echo '2  <input type="radio" name="update_image_rotate'.$i.'" value="2" '.$rot2.'>';
          echo '&nbsp;&nbsp;&nbsp;&nbsp;';
          echo '3  <input type="radio" name="update_image_rotate'.$i.'" value="3" '.$rot3.'>';
+         echo '<br />Master image ID: <input type="text" size="2"  name="update_master_ID'.$i.'"       value="'.$master_ID .'">';
+         echo '&nbsp;&nbsp; x: <input type="text" size="2"  name="update_x'.$i.'"       value="'.$image_plan_x .'">';
+         echo '&nbsp;&nbsp; y: <input type="text" size="2"  name="update_y'.$i.'"       value="'.$image_plan_y .'">';
+
          echo '</i>';
 
          echo '   </div>';
