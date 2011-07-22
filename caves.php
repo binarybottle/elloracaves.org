@@ -7,7 +7,7 @@ $image_width = 360;
 $scale_images = 1;
 $scale_plans = 0.75;
 $offsetX_plan = 120;
-$default_cave_ID = '10';
+$default_cave_ID = '5';
 $default_plan_floor = 1;
 $default_plan_width = $scale_plans*480;
 $miniplan_width = 100;
@@ -72,9 +72,7 @@ if (strlen(trim($searchstring))==0 || strlen($searchimage)>0) {
           ';
     foreach ($Images as &$row) {
 
-        //$master_ID = $row['image_master_ID'];
-        //echo $master_ID.'-m i-'.$row['image_ID'];
-        //if ($row['image_ID'] == $master_ID) {
+//        if ($row['image_ID'] == $row['image_master_ID']) {
 
             $X = $row['image_plan_x'];
             $Y = $row['image_plan_y'];
@@ -93,13 +91,20 @@ if (strlen(trim($searchstring))==0 || strlen($searchimage)>0) {
             if ($X>0 && $Y>0 && $row['image_plan_ID']==$plan_ID) {
               $x0 = $scale_plans*$X;
               $y0 = $scale_plans*$Y;
+     if ($row['image_ID'] == $row['image_master_ID']) {
               echo '<img src="http://media.elloracaves.org/images/decor/marker_'.$marker_state.'.png"
                     id="marker'.$row["image_ID"].'" rel="target'.$row["image_ID"].'"
                     border="0" width="'.$marker_size.'" height="'.$marker_size.'"
                     style="position:absolute; top:'.$y0.'px; left:'.$x0.'px;" />
                     ';
+     } else {
+              echo '<span
+                    id="marker'.$row["image_ID"].'" rel="target'.$row["image_ID"].'"
+                    border="0" width="'.$marker_size.'" height="'.$marker_size.'"
+                    style="position:absolute; top:'.$y0.'px; left:'.$x0.'px;"></span>';
+     }
             }
-        //}
+//        }
     }
     echo '</dl></div>';
     echo '</div>';
@@ -166,16 +171,10 @@ if (strlen(trim($searchstring))==0 || strlen($searchimage)>0) {
       echo '<span class="'.$active_string2.'caption" style="width:'.$caption_width.'px;
                   position:absolute; bottom:0px; left:370px; font-size:85%; 
                   height:'.($slide_height-300).'px; overflow:auto; background-color:#000000;">';
-//                  overflow:auto; background-color:#000000;">';
-//                  height:'.$slide_height.'px; overflow:auto; background-color:#000000;">';
       echo $row["image_subject"];
       if ($row["image_description"]!="") {
           echo '<br /><br />';
-//          echo '<div style="height:'.$slide_height.'px;width:'.$caption_width.'px;overflow:scroll;">';
-//          echo '<div style="height:20px;width:100px;overflow:scroll;">';
           echo $row["image_description"];
-//          echo '</div>';
-
       }
       echo '<br /><br /><span class="tiny">'.$row["image_ID"].'</span>';
       echo '</span>';
