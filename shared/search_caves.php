@@ -47,8 +47,8 @@ switch($cmd)
 
     // All images for selected cave and floor (no keywords)
     if (strlen(trim($searchstring))==0 && strlen(trim($searchcave))>0) {
-      $sql = "SELECT image_ID, image_cave_ID, image_file, image_rank, image_plan_ID, image_date,
-             image_description, image_subject, image_motifs, image_medium, image_notes,
+      $sql = "SELECT image_ID, image_master_ID, image_cave_ID, image_file, image_rank, image_plan_ID,
+             image_date, image_description, image_subject, image_motifs, image_medium, image_notes,
              cave_name, plan_ID, plan_cave_ID, plan_image_ID, plan_width, plan_image, plan_floor,
              image_plan_x, image_plan_y
              FROM images, caves, plans
@@ -90,9 +90,9 @@ switch($cmd)
       } else {
         $s_string = " ";
       }
-      $sql = "SELECT image_ID, image_cave_ID, image_file, image_rank, image_plan_ID, image_date
-                     image_description, image_subject, image_motifs, image_medium, image_notes,
-                     image_plan_x, image_plan_y,
+      $sql = "SELECT image_ID, image_master_ID, image_cave_ID, image_file, image_rank, image_plan_ID,
+                     image_date, image_description, image_subject, image_motifs, image_medium,
+                     image_notes, image_plan_x, image_plan_y,
               MATCH(image_description, image_subject, image_motifs, image_medium, image_notes)
               AGAINST ('$searchstring'" . $bool . ") AS score FROM images
               WHERE MATCH(image_description, image_subject, image_motifs, image_medium, image_notes)

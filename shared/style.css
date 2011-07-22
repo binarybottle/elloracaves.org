@@ -17,7 +17,7 @@ body {
 .banner {
   position: absolute;
   left: 20px;
-  top: 20px;
+  top: 17px;
   color: #eae2c4; #9C957C;
 }
 
@@ -52,14 +52,14 @@ body {
   position: absolute;
   left: 180px;
   width: 700px;
-  top: 220px;
+  top: 200px;
   font-size: 95%;
 }
 
 .search {
   position: absolute;
-  left: 465px;
-  top: 23px;
+  left: 665px;
+  top: 12px;
   font-size: 75%;
 }
 .input_keywords {
@@ -89,15 +89,9 @@ body {
   font-size: 90%;
 }
 
-.plan {
+.planbox {
   position: absolute;
-  top: 270px;
-}
-.plan_title {
-  position: absolute;
-  left: 270px;
-  top: 760px;
-  font-size: 110%;
+  top: 220px;
 }
 .no_plan_title {
   position: absolute;

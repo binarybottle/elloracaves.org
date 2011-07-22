@@ -3,6 +3,8 @@
 #$table1 = "images_20090923";
 #$table1 = "images_20100531";
 #$table1 = "images_20110405";
+#$table1 = "images_20110404";
+#$table1 = "images_20110101";
 $table2 = "images";
 $field1 = "description";
 $field2 = "image_description";
@@ -28,8 +30,8 @@ if ($result1) {
         $query2 .= " WHERE image_ID = ".$ID;
         echo $query2 . '<br />';
         
-        $result2 = mysql_query( $query2, $dbh );
-        echo "<result>" . ( $result2 ? "success" : "failure" ) . "</result>";
+        //$result2 = mysql_query( $query2, $dbh );
+        //echo "<result>" . ( $result2 ? "success" : "failure" ) . "</result>";
     }
 }
 

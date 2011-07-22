@@ -6,9 +6,7 @@ $plan_dir    = "http://media.elloracaves.org/images/plans/";
 $image_width = 360;
 $scale_images = 1;
 $scale_plans = 0.75;
-$offset_plan = 120;
-$offsetX_marker = 0;
-$offsetY_marker = 245 + $scale_plans*20;
+$offsetX_plan = 120;
 $default_cave_ID = '10';
 $default_plan_floor = 1;
 $default_plan_width = $scale_plans*480;
@@ -55,18 +53,21 @@ if (strlen(trim($searchstring))==0 || strlen($searchimage)>0) {
   if ($plan_image_ID > 0) {
 
     // Ground plan
-    echo '<img src="'.$plan_dir.$plan_image.'" width="'.$plan_width.'" class="plan" style="position:absolute; left:'.$offset_plan.'px;"/>';
-    echo '<span class="plan_title">'.$cave_name.'</span>';
+    echo '<div class="planbox" style="position:absolute; left:'.$offsetX_plan.'px; height:'.$slide_height.'px;">';
+    echo '<div style="position:absolute; bottom:0px;">';
+    echo '<img src="'.$plan_dir.$plan_image.'" width="'.$plan_width.'px;"/>';
+    echo '<span style="position:absolute; left:'.($plan_width/2-20).'px; bottom:-20px;">'.$cave_name.'</span>';
 
     // Markers on ground plan
     $plan_size = getimagesize($plan_dir.$plan_image);
     $plan_height = $plan_size[1];
     $plan_height = $scale_plans * $plan_height;
-    echo '<script type="text/javascript"> 
-           var paper = Raphael('.($offset_plan+3).',10,'.$plan_width.','.$plan_height.');
-          </script>
-    ';
-    echo '<div style="position:absolute; left:'.$offset_plan.'px;">
+    //echo '<script type="text/javascript"> 
+    //       var paper = Raphael('.($offsetX_plan+3).',10,'.$plan_width.','.$plan_height.');
+    //      </script>
+    //';
+    //echo '<div style="position:absolute; left:'.$offsetX_plan.'px;">
+    echo '<div>
           <dl id="switches">
           ';
     foreach ($Images as &$row) {
@@ -90,8 +91,8 @@ if (strlen(trim($searchstring))==0 || strlen($searchimage)>0) {
             }
             // If there is a pair of coordinates for an image:
             if ($X>0 && $Y>0 && $row['image_plan_ID']==$plan_ID) {
-              $x0 = $offsetX_marker + $scale_plans*$X;
-              $y0 = $offsetY_marker + $scale_plans*$Y;
+              $x0 = $scale_plans*$X;
+              $y0 = $scale_plans*$Y;
               echo '<img src="http://media.elloracaves.org/images/decor/marker_'.$marker_state.'.png"
                     id="marker'.$row["image_ID"].'" rel="target'.$row["image_ID"].'"
                     border="0" width="'.$marker_size.'" height="'.$marker_size.'"
@@ -100,8 +101,9 @@ if (strlen(trim($searchstring))==0 || strlen($searchimage)>0) {
             }
         //}
     }
-    echo '</dl></div>
-    ';
+    echo '</dl></div>';
+    echo '</div>';
+    echo '</div>';
 
     // Main images
     echo '<div class="slidebox" style="height:'.$slide_height.'px;">';
@@ -114,13 +116,66 @@ if (strlen(trim($searchstring))==0 || strlen($searchimage)>0) {
         $active_string1 = '';
         $active_string2 = '';
       }
+
+      // Image
       echo '<div id="image_'.$row["image_ID"].'" '.$active_string1.'>';
       echo '<img src="'.$image_dir.$row["image_file"].'" width="'.$image_width.'"/>';
+
+      // Scroll through images of the same object (image_master_ID):
+      $scroll_image_IDs = array();
+      $irow2 = 0;
+      foreach ($Images as &$row2) {
+          if ($row2['image_master_ID']==$row['image_master_ID']) {
+              $scroll_image_IDs[$irow2] = $row2['image_ID'];
+              if ($row2['image_ID']==$row['image_ID']) {
+                  $scroll_image_number = $irow2;
+              }
+              $irow2 = $irow2 + 1;
+          }
+      }
+      if (sizeof($scroll_image_IDs) > 1) {
+          echo '<span class="'.$active_string2.'caption" style="width:'.$image_width.'px;
+                      position:absolute; bottom:-20px; left:0px; font-size:85%;">';
+          $scroll_image_prev = $scroll_image_number - 1;
+          $scroll_image_next = $scroll_image_number + 1;
+          if ($scroll_image_prev > -1) {
+              echo '<span style="position:absolute; bottom:0px; left:0px;">';
+              echo '<a href="http://www.elloracaves.org/caves.php?cmd=search&words='.$searchstring;
+              echo '&cave_ID='.$searchcave.'&plan_floor='.$searchfloor;
+              echo '&image_ID='.$scroll_image_IDs[$scroll_image_prev].'">';
+              echo '<b><<</b>';
+              echo '</a>';
+              echo '</span>';
+          }
+          echo '<span style="position:absolute; bottom:0px; left:'.($image_width/2-24).'px;">';
+          echo ($scroll_image_number+1) .' of '. sizeof($scroll_image_IDs);
+          echo '</span>';
+          if ($scroll_image_next < sizeof($scroll_image_IDs)) {
+              echo '<span style="position:absolute; bottom:0px; right:0px;">';
+              echo '<a href="http://www.elloracaves.org/caves.php?cmd=search&words='.$searchstring;
+              echo '&cave_ID='.$searchcave.'&plan_floor='.$searchfloor;
+              echo '&image_ID='.$scroll_image_IDs[$scroll_image_next].'">';
+              echo '<b>>></b>';
+              echo '</a>';
+              echo '</span>';
+          }
+          echo '</span>';
+      }
+
+      // Caption
       echo '<span class="'.$active_string2.'caption" style="width:'.$caption_width.'px;
-                  position:absolute; bottom:0px; left:370px; font-size:85%;">';
+                  position:absolute; bottom:0px; left:370px; font-size:85%; 
+                  height:'.($slide_height-300).'px; overflow:auto; background-color:#000000;">';
+//                  overflow:auto; background-color:#000000;">';
+//                  height:'.$slide_height.'px; overflow:auto; background-color:#000000;">';
       echo $row["image_subject"];
       if ($row["image_description"]!="") {
-          echo '<br /><br />'.$row["image_description"];
+          echo '<br /><br />';
+//          echo '<div style="height:'.$slide_height.'px;width:'.$caption_width.'px;overflow:scroll;">';
+//          echo '<div style="height:20px;width:100px;overflow:scroll;">';
+          echo $row["image_description"];
+//          echo '</div>';
+
       }
       echo '<br /><br /><span class="tiny">'.$row["image_ID"].'</span>';
       echo '</span>';
@@ -136,9 +191,58 @@ if (strlen(trim($searchstring))==0 || strlen($searchimage)>0) {
     echo '<div id="slides_dummy">';
     foreach ($Images as &$row) {
         if ($row['image_ID']==$start_image_ID) {
+
+          // Image
           echo '<div id="image_'.$row["image_ID"].'">';
           echo '<img src="'.$image_dir.$row["image_file"].'" width="'.$image_width.'"/>';
-          echo '<span class="caption" style="width:'.$caption_width.'">';
+
+          // Scroll through images of the same object (image_master_ID):
+          $irow2 = 0;
+          foreach ($Images as &$row2) {
+              if ($row2['image_master_ID']==$row['image_master_ID']) {
+                  $scroll_image_IDs[$irow2] = $row2['image_ID'];
+                  if ($row2['image_ID']==$row['image_ID']) {
+                      $scroll_image_number = $irow2;
+                  }
+                  $irow2 = $irow2 + 1;
+              }
+          }
+          if (sizeof($scroll_image_IDs) > 1) {
+              echo '<span class="'.$active_string2.'caption" style="width:'.$image_width.'px;
+                          position:absolute; bottom:-20px; left:0px; font-size:85%;">';
+              $scroll_image_prev = $scroll_image_number - 1;
+              $scroll_image_next = $scroll_image_number + 1;
+              if ($scroll_image_prev > -1) {
+                  echo '<span style="position:absolute; bottom:0px; left:0px;">';
+                  echo '<a href="http://www.elloracaves.org/caves.php?cmd=search&words='.$searchstring;
+                  echo '&cave_ID='.$searchcave.'&plan_floor='.$searchfloor;
+                  echo '&image_ID='.$scroll_image_IDs[$scroll_image_prev].'">';
+                  echo '<<';
+                  echo '</a>';
+                  echo '</span>';
+              }
+              echo '<span style="position:absolute; bottom:0px; left:'.($image_width/2-24).'px;">';
+              echo ($scroll_image_number+1) .' of '. sizeof($scroll_image_IDs);
+              echo '</span>';
+              if ($scroll_image_next < sizeof($scroll_image_IDs)) {
+                  echo '<span style="position:absolute; bottom:0px; right:0px;">';
+                  echo '<a href="http://www.elloracaves.org/caves.php?cmd=search&words='.$searchstring;
+                  echo '&cave_ID='.$searchcave.'&plan_floor='.$searchfloor;
+                  echo '&image_ID='.$scroll_image_IDs[$scroll_image_next].'">';
+                  echo '>>';
+                  echo '</a>';
+                  echo '</span>';
+              }
+              echo '</span>';
+          }
+
+          // Caption
+          echo '<span class="caption" style="width:'.$caption_width.'px; 
+                  height:'.($slide_height-300).'px; overflow:auto;
+                  background-color:#000000;
+                  scrollbar-base-color:#000000;
+                  scrollbar-face-color:#000000;">';
+          echo $row["image_subject"];
           if ($row["image_description"]!="") {
               echo '<br /><br />'.$row["image_description"];
           }
@@ -178,7 +282,8 @@ echo ':<br />';
 
 foreach ($Images as &$row) {
   echo '<span id="thumb_'.$row["image_ID"].'">';
-  echo '<a href="http://www.elloracaves.org/caves.php?cmd=search&words='.$searchstring.'&cave_ID='.$searchcave.'&plan_floor='.$searchfloor.'&image_ID='.$row['image_ID'].'">';
+  echo '<a href="http://www.elloracaves.org/caves.php?cmd=search&words='.$searchstring;
+  echo '&cave_ID='.$searchcave.'&plan_floor='.$searchfloor.'&image_ID='.$row['image_ID'].'">';
 
   if ($row['image_ID']==$start_image_ID) {
     echo '<img src="' . $thumb_dir . $row['image_file'] . '" height="100" border="2"/></a>';
