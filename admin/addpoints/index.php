@@ -1,21 +1,18 @@
 <?php
- $cave_ID = mysql_escape_string($_POST['cave_ID']);
- if ($cave_ID=="") {
-   $cave_ID = 23;
+ $plan_ID = mysql_escape_string($_GET['plan_ID']);
+ if ($plan_ID=="") {
+   $plan_ID = 10;
  }
  $image_dir = "http://media.elloracaves.org/images/caves_360px/";
  $plan_dir = "http://media.elloracaves.org/images/plans/";
 
  include_once("../../../db/elloracaves_db.php");
- //include("../shared/header_start.php");
 
  $image_width = 360;
  $plus        = 5;
- $nclicks     = 2;
-
+ $nclicks     = 1;
  $yoffset     = 13;
  $xoffset     = 5;
-
  $ydraw       = -2;
  $xdraw       = 3;
 ?>
@@ -74,19 +71,18 @@
 
 <title>Add coordinates to Ellora Cave Temple ground plans</title>
 
-<!-- Search for image with coordinate < 0 -->
+<!-- Search for image with empty or negative coordinate -->
 <?php
 $sql = "SELECT image_ID, image_file, image_rank, image_description,";
-$sql.= "image_cave_ID, image_plan_x, image_plan_y,";
+$sql.= "image_cave_ID, image_plan_ID, image_plan_x, image_plan_y,";
 $sql.= "cave_ID, cave_name, ";
 $sql.= "plan_cave_ID, plan_image, plan_floor, plan_width, plan_ID ";
 $sql.= "FROM images, caves, plans ";
-//$sql.= "WHERE (image_plan_x<0 OR image_plan_y<0) ";
-//$sql.= "AND image_cave_ID=cave_ID ";
-$sql.= "WHERE image_cave_ID=cave_ID ";
+$sql.= "WHERE (image_plan_x<0 OR image_plan_y<0 or image_plan_x='' OR image_plan_y='') ";
 $sql.= "AND image_cave_ID=plan_cave_ID ";
 $sql.= "AND plan_cave_ID=cave_ID ";
-$sql.= "AND cave_ID=".$cave_ID." ";
+$sql.= "AND image_plan_ID=".$plan_ID." ";
+$sql.= "AND plan_ID=".$plan_ID." ";
 $sql.= "AND image_rank=1 ";
 $result = mysql_query($sql) or die (mysql_error());
 
@@ -101,11 +97,11 @@ $plan_image  = $row->plan_image;
 $plan_floor  = $row->plan_floor;
 $plan_width  = $row->plan_width;
 $image_cave_ID  = $row->image_cave_ID;
-$plan_ID  = $row->plan_ID;
+$plan_ID = $row->plan_ID;
 
-if ($plan_image=="") {
-  echo '<br /><br />All images for cave ID = '.$cave_ID.' have been assigned.  
-  To reassign, go to <a href="edit.php">edit.php</a>';
+
+if ($image_ID=="") {
+  echo '<br /><br />All images assigned to cave plan ID = '.$plan_ID.' have been given coordinates.';
 } else {
 
   // GROUND PLAN
@@ -119,7 +115,8 @@ if ($plan_image=="") {
          plan_ID, plan_cave_ID, plan_image_ID, plan_width, 
          plan_image, image_plan_x, image_plan_y
          FROM images, caves, plans
-         WHERE cave_ID = '".$cave_ID."'
+         WHERE image_plan_ID = ".$plan_ID."
+         AND plan_ID = ".$plan_ID."
          AND image_cave_ID = cave_ID
          AND plan_cave_ID = cave_ID
          AND image_rank = 1
@@ -129,8 +126,8 @@ if ($plan_image=="") {
   $Images = array();
   $i=0;
   while($row = mysql_fetch_array($result)){
-// CAVE 10 IMAGES REPEAT!!!!
-    if ($searchcave==10) {
+// CAVE 10 floor 1 IMAGES REPEAT!!!!
+    if ($plan_ID==10) {
       if ($i % 2 == 0) {
         $Images[$i] = $row;
       }
@@ -143,9 +140,7 @@ if ($plan_image=="") {
   echo '<div style="position:absolute; left:0px;">';
   echo '<!--script type="text/javascript">
         var paper = Raphael(0,0,'.$plan_width.','.($plan_width*5).');
-        </script-->
-        ';
-
+        </script-->';
   foreach ($Images as &$row) {
       $X = explode(",",$row['image_plan_x']);
       $Y = explode(",",$row['image_plan_y']);
@@ -161,32 +156,8 @@ if ($plan_image=="") {
               border="0" width="'.$marker_size1.'" height="'.$marker_size1.'"
               style="position:absolute;
                      top:'.$y0.'px;
-                     left:'.$x0.'px;" />
-              ';
-        /*
-        // If there is a second pair of coordinates for an image,
-        // draw lines of sight from standing marker to subject marker
-        $x1 = $X[1];
-        $y1 = $Y[1];
-        if ($x1>0 && $y1>0) {
-          echo '<img src="http://media.elloracaves.org/images/decor/marker_on.png"
-                id="marker'.$row["image_ID"].'"
-                border="0" width="'.$marker_size2.'" height="'.$marker_size2.'"
-                style="position:absolute;
-                       top:'.($y1-$ydraw).'px;
-                       left:'.($x1+$xdraw).'px;" />
-                ';
-          echo '<script type="text/javascript"> 
-                var jg2 = new jsGraphics("plan");
-                jg2.setColor("#ff0000");
-                jg2.drawLine('.($xoffset+$x0).', '.($yoffset+$y0).', '.($xoffset+$x1).', '.($yoffset+$y1).');
-                jg2.paint();
-                </script>
-                ';
-        }
-        */
+                     left:'.$x0.'px;" />';
       }
-
   }
   echo '</div>';
 ?>
@@ -210,6 +181,8 @@ if ($plan_image=="") {
     <span class="caption"><? echo $image_ID; ?>:</span>
      &nbsp;&nbsp;&nbsp;
     <span class="caption"><b><? echo $cave_name; ?></b></span>
+    <span class="caption"> (floor <? echo $plan_floor; ?>, </span>
+    <span class="caption">plan <? echo $plan_ID; ?>)</span>
      &nbsp;&nbsp;&nbsp;
     <span class="caption"><? echo $image_file; ?></span>
     <br /><br />
@@ -220,15 +193,11 @@ if ($plan_image=="") {
     </div>
     <br /><br />
 
-    <form method="post" action="<?php echo $PHP_SELF;?>">
-     <?php include('../shared/cave_menu_return_cave_ID.php'); ?>
-     <input type="submit" value="select cave" name="submit">
+    <form method="get" action="<?php echo $PHP_SELF; ?>?plan_ID=".$plan_ID>
+     <?php include('../shared/cave_plans_menu.php'); ?>
+     <input type="submit" value="select cave plan" name="submit">
     </form>
 
-</div>
-
-
-   </div>
   </div>
 
 <? } ?>

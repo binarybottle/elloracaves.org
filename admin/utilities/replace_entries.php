@@ -2,9 +2,9 @@
 
 $table = "images";
 $source_field = "image_cave_ID";
-$source_value = "4";
-$target_field = "image_plan_x";
-$target_value = "-1";
+$source_value = "102";
+$target_field = "image_plan_ID";
+$target_value = "102";
 
  // Log into MySQL server
 require_once('../../../db/elloracaves_db.php');

@@ -7,7 +7,7 @@ $image_width = 360;
 $scale_images = 1;
 $scale_plans = 0.75;
 $offsetX_plan = 120;
-$default_cave_ID = '5';
+$default_cave_ID = '10';
 $default_plan_floor = 1;
 $default_plan_width = $scale_plans*480;
 $miniplan_width = 100;
@@ -39,7 +39,7 @@ include("./shared/header_caves.php");
 if ($plan_image_ID > 0 && strlen(trim($searchstring))==0) {
     echo '<div class="miniplans">';
     for ($iplan = 0; $iplan < sizeof($plan_images); $iplan++) {
-      echo '<a href="http://www.elloracaves.org/caves.php?cmd=search&words='.$searchstring.'&cave_ID='.$searchcave.'&plan_floor='.($iplan+1).'">';
+      echo '<a href="http://elloracaves.org/caves.php?cmd=search&words=&imageID=&cave_ID='.$searchcave.'&plan_floor='.($iplan+1).'">';
       echo '<img src="'.$plan_dir.$plan_images[$iplan].'" width="'.$miniplan_width.'"/><br />';
       echo '</a>';
       echo '<div class="miniplan_title">floor '.($iplan+1).'</div><br /><br /><br />';
@@ -76,7 +76,7 @@ if (strlen(trim($searchstring))==0 || strlen($searchimage)>0) {
 
             $X = $row['image_plan_x'];
             $Y = $row['image_plan_y'];
-    
+
             // Markers:
             if ($row['image_ID']==$searchimage) {
               echo '<dt class = "active">';
@@ -145,7 +145,7 @@ if (strlen(trim($searchstring))==0 || strlen($searchimage)>0) {
           $scroll_image_next = $scroll_image_number + 1;
           if ($scroll_image_prev > -1) {
               echo '<span style="position:absolute; bottom:0px; left:0px;">';
-              echo '<a href="http://www.elloracaves.org/caves.php?cmd=search&words='.$searchstring;
+              echo '<a href="http://elloracaves.org/caves.php?cmd=search&words='.$searchstring;
               echo '&cave_ID='.$searchcave.'&plan_floor='.$searchfloor;
               echo '&image_ID='.$scroll_image_IDs[$scroll_image_prev].'">';
               echo '<b><<</b>';
@@ -157,7 +157,7 @@ if (strlen(trim($searchstring))==0 || strlen($searchimage)>0) {
           echo '</span>';
           if ($scroll_image_next < sizeof($scroll_image_IDs)) {
               echo '<span style="position:absolute; bottom:0px; right:0px;">';
-              echo '<a href="http://www.elloracaves.org/caves.php?cmd=search&words='.$searchstring;
+              echo '<a href="http://elloracaves.org/caves.php?cmd=search&words='.$searchstring;
               echo '&cave_ID='.$searchcave.'&plan_floor='.$searchfloor;
               echo '&image_ID='.$scroll_image_IDs[$scroll_image_next].'">';
               echo '<b>>></b>';
@@ -183,9 +183,9 @@ if (strlen(trim($searchstring))==0 || strlen($searchimage)>0) {
     echo '</div>';
     echo '</div>';
 
-  // Main images with no plan image
+  // Main images with no plan image or no images assigned to plan
   } else {
-    echo '<div class="no_plan_title">'.$cave_name.' plan under preparation...</div>';
+    echo '<div class="no_plan_title">'.$cave_name.' No images assigned to plan.</div>';
     echo '<div class="slidebox" style="height:'.$slide_height.'px;">';
     echo '<div id="slides_dummy">';
     foreach ($Images as &$row) {
@@ -213,7 +213,7 @@ if (strlen(trim($searchstring))==0 || strlen($searchimage)>0) {
               $scroll_image_next = $scroll_image_number + 1;
               if ($scroll_image_prev > -1) {
                   echo '<span style="position:absolute; bottom:0px; left:0px;">';
-                  echo '<a href="http://www.elloracaves.org/caves.php?cmd=search&words='.$searchstring;
+                  echo '<a href="http://elloracaves.org/caves.php?cmd=search&words='.$searchstring;
                   echo '&cave_ID='.$searchcave.'&plan_floor='.$searchfloor;
                   echo '&image_ID='.$scroll_image_IDs[$scroll_image_prev].'">';
                   echo '<<';
@@ -225,7 +225,7 @@ if (strlen(trim($searchstring))==0 || strlen($searchimage)>0) {
               echo '</span>';
               if ($scroll_image_next < sizeof($scroll_image_IDs)) {
                   echo '<span style="position:absolute; bottom:0px; right:0px;">';
-                  echo '<a href="http://www.elloracaves.org/caves.php?cmd=search&words='.$searchstring;
+                  echo '<a href="http://elloracaves.org/caves.php?cmd=search&words='.$searchstring;
                   echo '&cave_ID='.$searchcave.'&plan_floor='.$searchfloor;
                   echo '&image_ID='.$scroll_image_IDs[$scroll_image_next].'">';
                   echo '>>';
@@ -275,13 +275,13 @@ if (strlen(trim($searchstring)) > 0) {
   echo '<i> with search string </i>"<b>'.$searchstring.'</b>"';
 } 
 if (strlen($searchcave) > 0) {
-  echo '<i> in cave </i> <b>'.$searchcave.'</b>'; // , floor '.$searchfloor;
+  echo '<i> in </i> <b>'.$row["cave_name"].'</b>'; // , floor '.$searchfloor;
 }
 echo ':<br />';
 
 foreach ($Images as &$row) {
   echo '<span id="thumb_'.$row["image_ID"].'">';
-  echo '<a href="http://www.elloracaves.org/caves.php?cmd=search&words='.$searchstring;
+  echo '<a href="http://elloracaves.org/caves.php?cmd=search&words='.$searchstring;
   echo '&cave_ID='.$searchcave.'&plan_floor='.$searchfloor.'&image_ID='.$row['image_ID'].'">';
 
   if ($row['image_ID']==$start_image_ID) {

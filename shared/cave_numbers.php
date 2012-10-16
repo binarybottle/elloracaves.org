@@ -79,7 +79,7 @@
           <img src="http://media.elloracaves.org/images/decor/marker_number_off_18px.png" id="marker_number"
                border="0" width="18" height="18" style="position:absolute; left:-2px; top:-2px;" />
 </a>
-<!--a href="http://www.elloracaves.org/caves.php?cmd=search&words=&image_ID=&cave_ID=201&plan_floor=1" id="c201">
+<!--a href="http://www.elloracaves.org/caves.php?cmd=search&words=&image_ID=&cave_ID=120&plan_floor=1" id="c120">
           <img src="http://media.elloracaves.org/images/decor/marker_number_off_18px.png" id="marker_number"
                border="0" width="18" height="18" style="position:absolute; left:-2px; top:-2px;" />
 </a-->
@@ -91,7 +91,7 @@
           <img src="http://media.elloracaves.org/images/decor/marker_number_off_18px.png" id="marker_number"
                border="0" width="18" height="18" style="position:absolute; left:-2px; top:-2px;" />
 </a>
-<!--a href="http://www.elloracaves.org/caves.php?cmd=search&words=&image_ID=&cave_ID=221&plan_floor=1" id="c221">
+<!--a href="http://www.elloracaves.org/caves.php?cmd=search&words=&image_ID=&cave_ID=122&plan_floor=1" id="c122">
           <img src="http://media.elloracaves.org/images/decor/marker_number_off_18px.png" id="marker_number"
                border="0" width="18" height="18" style="position:absolute; left:-2px; top:-2px;" />
 </a-->
@@ -103,7 +103,7 @@
           <img src="http://media.elloracaves.org/images/decor/marker_number_off_18px.png" id="marker_number"
                border="0" width="18" height="18" style="position:absolute; left:-2px; top:-2px;" />
 </a>
-<!--a href="http://www.elloracaves.org/caves.php?cmd=search&words=&image_ID=&cave_ID=241&plan_floor=1" id="c241">
+<!--a href="http://www.elloracaves.org/caves.php?cmd=search&words=&image_ID=&cave_ID=124&plan_floor=1" id="c124">
           <img src="http://media.elloracaves.org/images/decor/marker_number_off_18px.png" id="marker_number"
                border="0" width="18" height="18" style="position:absolute; left:-2px; top:-2px;" />
 </a-->
@@ -131,7 +131,7 @@
           <img src="http://media.elloracaves.org/images/decor/marker_number_off_18px.png" id="marker_number"
                border="0" width="18" height="18" style="position:absolute; left:-2px; top:-2px;" />
 </a>
-<!--a href="http://www.elloracaves.org/caves.php?cmd=search&words=&image_ID=&cave_ID=301&plan_floor=1" id="c301">
+<!--a href="http://www.elloracaves.org/caves.php?cmd=search&words=&image_ID=&cave_ID=130&plan_floor=1" id="c130">
           <img src="http://media.elloracaves.org/images/decor/marker_number_off_18px.png" id="marker_number"
                border="0" width="18" height="18" style="position:absolute; left:-2px; top:-2px;" />
 </a-->
@@ -143,7 +143,7 @@
           <img src="http://media.elloracaves.org/images/decor/marker_number_off_18px.png" id="marker_number"
                border="0" width="18" height="18" style="position:absolute; left:-2px; top:-2px;" />
 </a>
-<!--a href="http://www.elloracaves.org/caves.php?cmd=search&words=&image_ID=&cave_ID=321&plan_floor=1" id="c321">
+<!--a href="http://www.elloracaves.org/caves.php?cmd=search&words=&image_ID=&cave_ID=132&plan_floor=1" id="c132">
           <img src="http://media.elloracaves.org/images/decor/marker_number_off_18px.png" id="marker_number"
                border="0" width="18" height="18" style="position:absolute; left:-2px; top:-2px;" />
 </a-->
@@ -155,11 +155,11 @@
           <img src="http://media.elloracaves.org/images/decor/marker_number_off_18px.png" id="marker_number"
                border="0" width="18" height="18" style="position:absolute; left:-2px; top:-2px;" />
 </a>
-<!--a href="http://www.elloracaves.org/caves.php?cmd=search&words=&image_ID=&cave_ID=40&plan_floor=1" id="c40">
+<!--a href="http://www.elloracaves.org/caves.php?cmd=search&words=&image_ID=&cave_ID=101&plan_floor=1" id="c101">
           <img src="http://media.elloracaves.org/images/decor/marker_number_off_18px.png" id="marker_number"
                border="0" width="18" height="18" style="position:absolute; left:-2px; top:-2px;" />
 </a-->
-<!--a href="http://www.elloracaves.org/caves.php?cmd=search&words=&image_ID=&cave_ID=41&plan_floor=1" id="c41">
+<!--a href="http://www.elloracaves.org/caves.php?cmd=search&words=&image_ID=&cave_ID=102&plan_floor=1" id="c102">
           <img src="http://media.elloracaves.org/images/decor/marker_number_off_18px.png" id="marker_number"
                border="0" width="18" height="18" style="position:absolute; left:-2px; top:-2px;" />
 </a-->
@@ -204,24 +204,24 @@ if ($default_cave_ID != '0' && strlen($searchcave)>0) {
 <a href="http://www.elloracaves.org/caves.php?cmd=search&words=&image_ID=&cave_ID=18&plan_floor=1" id="c18">18</a>
 <a href="http://www.elloracaves.org/caves.php?cmd=search&words=&image_ID=&cave_ID=19&plan_floor=1" id="c19">19</a>
 <a href="http://www.elloracaves.org/caves.php?cmd=search&words=&image_ID=&cave_ID=20&plan_floor=1" id="c20">20</a>
-<!--a href="http://www.elloracaves.org/caves.php?cmd=search&words=&image_ID=&cave_ID=201&plan_floor=1" id="c201">20A</a-->
+<!--a href="http://www.elloracaves.org/caves.php?cmd=search&words=&image_ID=&cave_ID=120&plan_floor=1" id="c120">20A</a-->
 <a href="http://www.elloracaves.org/caves.php?cmd=search&words=&image_ID=&cave_ID=21&plan_floor=1" id="c21">21</a>
 <a href="http://www.elloracaves.org/caves.php?cmd=search&words=&image_ID=&cave_ID=22&plan_floor=1" id="c22">22</a>
-<!--a href="http://www.elloracaves.org/caves.php?cmd=search&words=&image_ID=&cave_ID=221&plan_floor=1" id="c221">22A</a-->
+<!--a href="http://www.elloracaves.org/caves.php?cmd=search&words=&image_ID=&cave_ID=122&plan_floor=1" id="c122">22A</a-->
 <a href="http://www.elloracaves.org/caves.php?cmd=search&words=&image_ID=&cave_ID=23&plan_floor=1" id="c23">23</a>
 <a href="http://www.elloracaves.org/caves.php?cmd=search&words=&image_ID=&cave_ID=24&plan_floor=1" id="c24">24</a>
-<!--a href="http://www.elloracaves.org/caves.php?cmd=search&words=&image_ID=&cave_ID=241&plan_floor=1" id="c241">24A</a-->
+<!--a href="http://www.elloracaves.org/caves.php?cmd=search&words=&image_ID=&cave_ID=124&plan_floor=1" id="c124">24A</a-->
 <a href="http://www.elloracaves.org/caves.php?cmd=search&words=&image_ID=&cave_ID=25&plan_floor=1" id="c25">25</a>
 <a href="http://www.elloracaves.org/caves.php?cmd=search&words=&image_ID=&cave_ID=26&plan_floor=1" id="c26">26</a>
 <a href="http://www.elloracaves.org/caves.php?cmd=search&words=&image_ID=&cave_ID=27&plan_floor=1" id="c27">27</a>
 <a href="http://www.elloracaves.org/caves.php?cmd=search&words=&image_ID=&cave_ID=28&plan_floor=1" id="c28">28</a>
 <a href="http://www.elloracaves.org/caves.php?cmd=search&words=&image_ID=&cave_ID=29&plan_floor=1" id="c29">29</a>
 <a href="http://www.elloracaves.org/caves.php?cmd=search&words=&image_ID=&cave_ID=30&plan_floor=1" id="c30">30</a>
-<!--a href="http://www.elloracaves.org/caves.php?cmd=search&words=&image_ID=&cave_ID=301&plan_floor=1" id="c301">30A</a-->
+<!--a href="http://www.elloracaves.org/caves.php?cmd=search&words=&image_ID=&cave_ID=130&plan_floor=1" id="c130">30A</a-->
 <a href="http://www.elloracaves.org/caves.php?cmd=search&words=&image_ID=&cave_ID=31&plan_floor=1" id="c31">31</a>
 <a href="http://www.elloracaves.org/caves.php?cmd=search&words=&image_ID=&cave_ID=32&plan_floor=1" id="c32">32</a>
-<!--a href="http://www.elloracaves.org/caves.php?cmd=search&words=&image_ID=&cave_ID=321&plan_floor=1" id="c321">32 Yadavas</a-->
+<!--a href="http://www.elloracaves.org/caves.php?cmd=search&words=&image_ID=&cave_ID=132&plan_floor=1" id="c132">32 Yadavas</a-->
 <a href="http://www.elloracaves.org/caves.php?cmd=search&words=&image_ID=&cave_ID=33&plan_floor=1" id="c33">33</a>
 <a href="http://www.elloracaves.org/caves.php?cmd=search&words=&image_ID=&cave_ID=34&plan_floor=1" id="c34">34</a>
-<!--a href="http://www.elloracaves.org/caves.php?cmd=search&words=&image_ID=&cave_ID=40&plan_floor=1" id="c40">Ganeshaleni</a-->
-<!--a href="http://www.elloracaves.org/caves.php?cmd=search&words=&image_ID=&cave_ID=41&plan_floor=1" id="c41">Jogeshwari</a-->
+<!--a href="http://www.elloracaves.org/caves.php?cmd=search&words=&image_ID=&cave_ID=101&plan_floor=1" id="c101">Jogeshwari</a-->
+<!--a href="http://www.elloracaves.org/caves.php?cmd=search&words=&image_ID=&cave_ID=102&plan_floor=1" id="c102">Ganeshaleni</a-->

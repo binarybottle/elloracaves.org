@@ -3,8 +3,8 @@
  // Log into MySQL server
     require_once('../../../db/elloracaves_db.php');
 
-    $filepath = '_CAV';
-    $cave_ID = 'Misc';
+    $filepath = 'DSCN';
+    $cave_ID = '102';
     $ID1 = ;
     $ID2 = ;
 
