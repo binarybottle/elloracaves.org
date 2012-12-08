@@ -32,7 +32,7 @@ $default_plan_width = $scale*480;
 I'm sorry, but that address does not exist.
 <br>
 <br>
- Please try <a href="http://www.elloracaves.org">again</a>.
+ Please try <a href="http://elloracaves.org">again</a>.
 
   </td>
  </tr>

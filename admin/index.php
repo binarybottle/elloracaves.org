@@ -1,5 +1,5 @@
 <?php
 
-header("location: http://www.elloracaves.org/admin/annotate/");
+header("location: http://elloracaves.org/admin/annotate/");
 
 ?>

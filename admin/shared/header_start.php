@@ -11,6 +11,6 @@
   <meta name="dc.subject" content="photographs, annotated images, Ellora caves, Ellora cave temples">
   <meta name="dc.type" content="text.homepage.educational"> 
   <meta name="dc.format" content="text/html"> 
-  <meta name="dc.identifier" content="http://www.elloracaves.org">
-  <meta name="dc.identifier" content="http://www.elloracaves.org">
-  <link rel="stylesheet" type="text/css" href="http://www.elloracaves.org/admin/shared/style.css" />
+  <meta name="dc.identifier" content="http://elloracaves.org">
+  <meta name="dc.identifier" content="http://elloracaves.org">
+  <link rel="stylesheet" type="text/css" href="http://elloracaves.org/admin/shared/style.css" />
