@@ -11,12 +11,14 @@ function searchForm()
   echo '<input type="hidden" name="cmd" value="search" />';
   echo 'Keywords: ';
   echo '</td><td>';
-  echo '<input class="input_keywords" type="text" size="20" name="words" value="'.$searchwords.'" />';
-  echo '</td><td>Cave: </td><td>';
-  include('./shared/cave_menu.php');
-  echo '</td><td></td><td>';
+  echo '<input class="input_keywords" type="text" size="16" name="words" value="'.$searchwords.'" />';
+  echo '</td><td>';
   echo '<input class="submit_query" type="submit" value="Search" />';
+  echo '</td></tr><tr><td align="right">';
+  echo 'Cave: </td><td>';
+  include('./shared/cave_menu.php');
   echo '</form>';
+  echo '</td><td></td><td>';
   echo '</td></tr></table>';
   echo '</div>';
 }

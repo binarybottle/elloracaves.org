@@ -8,7 +8,7 @@ $default_plan_floor = 1;
 $miniplan_width = 100;
 $image_width = 360;
 $caption_left = 400;
-$thumbs_top = 560;
+$thumbs_shift_down = 20;
 $thumb_height = 100;
 $scale_plans = 0.75;
 $default_plan_width = $scale_plans*480;
@@ -130,6 +130,7 @@ echo '<div class="topbox" style="float:left;">';
         // Slide box (main image)
         echo '<div class="slidebox" style="float:left;">';
         echo '<div id="slides">';
+        $max_height = $plan_height;
         foreach ($Images as &$row) {
             if ($row['image_ID']==$start_image_ID) {
                 $active_string1 = 'class="active"';
@@ -141,10 +142,19 @@ echo '<div class="topbox" style="float:left;">';
 
             // Image
             echo '<div id="image_'.$row["image_ID"].'" '.$active_string1.'>';
-//            echo '<span>';
-            echo '<img src="'.$image_dir.$row["image_file"].'" width="'.$image_width.'"/>';
-//            echo '</span>';
-//            echo '<br /><br />';
+            $img = $image_dir.$row["image_file"];
+            echo '<img src="'.$img.'" width="'.$image_width.'"/>';
+
+            // Find maximum image height
+            $img_size = getimagesize($img);
+            $img_height = $img_size[1];
+            $img_width = $img_size[0];
+            if ($img_width < $image_width) {
+                $img_height *= $image_width / $img_width;
+            }
+            if ($img_height > $max_height) {
+                $max_height = $img_height;
+            }
 
             // Scroll through images of the same object (image_master_ID):
             $scroll_image_IDs = array();
@@ -188,7 +198,6 @@ echo '<div class="topbox" style="float:left;">';
             }
 
             // Caption
-//            echo '<div id="captions">';
             echo '<span class="'.$active_string2.'caption" style="font-size:85%; left:'.$caption_left.'px;">';
                  // overflow:auto; background-color:#000000;">';
             echo $row["image_subject"];
@@ -197,7 +206,6 @@ echo '<div class="topbox" style="float:left;">';
             }
             echo '<br /><br /><span class="tiny">'.$row["image_ID"].' ('.$row["image_file"].')</span>';
             echo '</span>';
-//            echo '</div>';  // captions
 
             echo '</div>';  // image_
         }
@@ -210,13 +218,12 @@ echo '<div class="topbox" style="float:left;">';
 
 
     // Thumb box (thumbnails)
-    echo '<div class="thumbbox" style="position:absolute; top:'.$thumbs_top.'px;">';
+    echo '<div class="thumbbox" style="position:absolute; top:'.($max_height + $thumbs_shift_down).'px;">';
 //    echo '<div class="thumbbox" style="float:left;">';  // (thumbs cover main image if bigger than plan)
-    echo '<br /><b>'.count($Images).'</b><i> result';
+    echo '<br />'.count($Images).' result';
     if (count($Images)!=1) { echo 's'; }
-    echo '</i>';
     if (strlen(trim($searchstring)) > 0) {
-        echo '<i> with search string </i>"<b>'.$searchstring.'</b>"';
+        echo ' with search string "<i>'.$searchstring.'</i>"';
     } 
     if (strlen($searchcave) > 0) {
         $sql = "SELECT cave_name
