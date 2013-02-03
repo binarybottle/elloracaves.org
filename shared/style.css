@@ -89,47 +89,48 @@ body {
   font-size: 90%;
 }
 
+.mainbox {
+  position: absolute;
+  top: 220px;
+  left: 140px;
+  width: 1140px;
+}
 .planbox {
-  position: absolute;
-  top: 220px;
+  position: relative;
 }
-.no_plan_title {
-  position: absolute;
-  left: 150px;
-  top: 500px;
-  font-size: 110%;
-}
-
 .slidebox {
-  position: absolute;
-  top: 220px;
-  left: 530px;
+  position: relative;
+  left: 40px;
 }
 #slides {
   position: absolute;
-  bottom: 0px;
-}
-#slides_dummy {
-  position: absolute;
-  bottom: 0px;
 }
 .caption {
   position: absolute;
-  bottom: 0px;
-  left: 370px;
-  font-size: 85%;
+  top: 80px;
+  //left: 400px;
   width: 300px;
+  font-size: 85%;
+}
+.thumbbox {
+  position: relative;
+  width: 800px;
+  top: 20px;
+  font-size: 90%;
+}
+#thumbs {
+  position: absolute;
+}
+.thumbnails {
+  position: absolute;
+  font-size: 90%;
 }
 
 .tiny { 
   font-size: 50%;
 }
 
-.thumbnails {
-  position: absolute;
-  left: 100px;
-  font-size: 90%;
-}
+
 
 a:link {
   color: #487a14;

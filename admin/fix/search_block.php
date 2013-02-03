@@ -81,16 +81,21 @@ include("../../../db/elloracaves_db.php");
    // Loop through search results
       while($row = mysql_fetch_object($result))
       {
-         $image_ID =           $row->image_ID;
-         $image_cave_ID =      $row->image_cave_ID;
-         $image_subject =      $row->image_subject;
-         $image_description =  $row->image_description;
-         $image_file =         $row->image_file;
-         $image_notes =        $row->image_notes;
-       //$image_medium =       $row->image_medium;
-       //$image_motifs =       $row->image_motifs;
-       //$image_date =         $row->image_date;
-       //$image_rank =         $row->image_rank;
+		$image_ID =           $row->image_ID;
+		$image_master_ID =    $row->image_master_ID;
+		$image_cave_ID =      $row->image_cave_ID;
+		$image_plan_ID =      $row->image_plan_ID;
+		$image_medium =       $row->image_medium;
+		$image_subject =      $row->image_subject;
+		$image_motifs =       $row->image_motifs;
+		$image_description =  $row->image_description;
+		$image_file =         $row->image_file;
+		$image_date =         $row->image_date;
+		$image_notes =        $row->image_notes;
+		$image_rank =         $row->image_rank;
+		$image_rotate =       $row->image_rotate;
+		$image_plan_x =       $row->image_plan_x;
+		$image_plan_y =       $row->image_plan_y;
 
       // Line
          echo '<hr size="1" />';

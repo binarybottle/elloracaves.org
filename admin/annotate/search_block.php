@@ -45,9 +45,9 @@ include("../../../db/elloracaves_db.php");
            } else {
                $s_string = " ";
            }
-           $sql = "SELECT image_ID, image_cave_ID, image_medium, image_subject,
+           $sql = "SELECT image_ID, image_master_ID, image_cave_ID, image_medium, image_subject,
                           image_motifs, image_description, image_file, image_date,
-                          image_notes, image_rank,
+                          image_notes, image_rank, image_plan_x, image_plan_y
                    MATCH(image_medium, image_subject, image_motifs, image_description,
                          image_notes)
                    AGAINST ('$searchstring'" . $bool . ") AS score FROM images
@@ -82,15 +82,16 @@ include("../../../db/elloracaves_db.php");
       while($row = mysql_fetch_object($result))
       {
          $image_ID =           $row->image_ID;
+         $image_master_ID =    $row->image_master_ID;
          $image_cave_ID =      $row->image_cave_ID;
          $image_subject =      $row->image_subject;
          $image_description =  $row->image_description;
          $image_file =         $row->image_file;
          $image_notes =        $row->image_notes;
-       //$image_medium =       $row->image_medium;
-       //$image_motifs =       $row->image_motifs;
-       //$image_date =         $row->image_date;
-       //$image_rank =         $row->image_rank;
+         $image_medium =       $row->image_medium;
+         $image_motifs =       $row->image_motifs;
+         $image_date =         $row->image_date;
+         $image_rank =         $row->image_rank;
 
       // Line
          echo '<hr size="1" />';

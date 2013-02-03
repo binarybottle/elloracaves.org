@@ -86,10 +86,30 @@
   left: 740px;
   top: 29px;
 }
+#c1016 {
+  position: absolute;
+  left: 712px;
+  top: 60px;
+}
+#c2016 {
+  position: absolute;
+  left: 680px;
+  top: 50px;
+}
+#c3016 {
+  position: absolute;
+  left: 752px;
+  top: 80px;
+}
+#c4016 {
+  position: absolute;
+  left: 755px;
+  top: 95px;
+}
 #c17 {
   position: absolute;
   left: 680px;
-  top: 70px;
+  top: 75px;
 }
 #c18 {
   position: absolute;
@@ -108,8 +128,8 @@
 }
 #c120 {
   position: absolute;
-  left: 545px;
-  top: 70px;
+  left: 578px;
+  top: 50px;
 }
 #c21 {
   position: absolute;
@@ -138,8 +158,13 @@
 }
 #c124 {
   position: absolute;
-  left: 470px;
-  top: 67px;
+  left: 494px;
+  top: 55px;
+}
+#c224 {
+  position: absolute;
+  left: 494px;
+  top: 35px;
 }
 #c25 {
   position: absolute;
@@ -173,8 +198,8 @@
 }
 #c130 {
   position: absolute;
-  left: 133px;
-  top: 49px;
+  left: 70px;
+  top: 75px;
 }
 #c31 {
   position: absolute;
@@ -188,8 +213,8 @@
 }
 #c132 {
   position: absolute;
-  left: 40px;
-  top: 130px;
+  left: 0px;
+  top: 120px;
 }
 #c33 {
   position: absolute;
@@ -201,12 +226,38 @@
   left: 53px;
   top: 165px;
 }
-#101 {
+#c10001 {
   position: absolute;
-  left: 100px;
-  top: 200px;
+  left: 365px;
+  top: -30px;
 }
-#102 {
+#c10006 {
   position: absolute;
-  left: 100px;
-  top: 200px;
+  left: 335px;
+  top: -30px;
+}
+#c10008 {
+  position: absolute;
+  left: 305px;
+  top: -30px;
+}
+#c10013 {
+  position: absolute;
+  left: 335px;
+  top: 0px;
+}
+#c10017 {
+  position: absolute;
+  left: 365px;
+  top: 0px;
+}
+#c20001 {
+  position: absolute;
+  left: 275px;
+  top: 25px;
+}
+#c20003 {
+  position: absolute;
+  left: 255px;
+  top: 25px;
+}

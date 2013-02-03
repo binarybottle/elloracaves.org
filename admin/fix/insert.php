@@ -20,19 +20,19 @@ if ($plan_floor) {
     }
 }
 
+$sql2 .= 'image_master_ID="'   .trim(mysql_real_escape_string(stripslashes($_POST[update_image_master_ID]))).'", ';
 $sql2 .= 'image_medium="'      .trim(mysql_real_escape_string(stripslashes($_POST[update_image_medium]))).'", ';
 $sql2 .= 'image_subject="'     .trim(mysql_real_escape_string(stripslashes($_POST[update_image_subject]))).'", ';
 $sql2 .= 'image_motifs="'      .trim(mysql_real_escape_string(stripslashes($_POST[update_image_motifs]))).'", ';
 $sql2 .= 'image_description="' .trim(mysql_real_escape_string(stripslashes($_POST[update_image_description]))).'", ';
+//$sql2 .= 'image_file="'  .trim(mysql_real_escape_string(stripslashes($_POST[update_image_file]))).'", ';
 $sql2 .= 'image_date="'  .trim(mysql_real_escape_string(stripslashes($_POST[update_image_date]))).'", ';
+$sql2 .= 'image_notes="' .trim(mysql_real_escape_string(stripslashes($_POST[update_image_notes]))).'", ';
 $sql2 .= 'image_rank="'  .trim(mysql_real_escape_string(stripslashes($_POST[update_image_rank]))).'", ';
 $sql2 .= 'image_rotate="'.trim(mysql_real_escape_string(stripslashes($_POST[update_image_rotate]))).'", ';
-$sql2 .= 'image_master_ID="'.trim(mysql_real_escape_string(stripslashes($_POST[update_master_ID]))).'", ';
-$sql2 .= 'image_plan_x="'.trim(mysql_real_escape_string(stripslashes($_POST[update_x]))).'", ';
-$sql2 .= 'image_plan_y="'.trim(mysql_real_escape_string(stripslashes($_POST[update_y]))).'" ';
+$sql2 .= 'image_plan_x="'.trim(mysql_real_escape_string(stripslashes($_POST[update_image_plan_x]))).'", ';
+$sql2 .= 'image_plan_y="'.trim(mysql_real_escape_string(stripslashes($_POST[update_image_plan_y]))).'" ';
 $sql2 .= ' WHERE image_ID="'   .trim(mysql_real_escape_string(stripslashes($_POST[update_image_ID]))).'" ';
-//$sql2 .= 'image_file="'  .trim(mysql_real_escape_string(stripslashes($_POST[update_image_file.$i2]))).'", ';
-//$sql2 .= 'image_notes="' .trim(mysql_real_escape_string(stripslashes($_POST[update_image_notes.$i2]))).'", ';
 
 $result2 = mysql_query($sql2) or die (mysql_error());
 

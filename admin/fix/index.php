@@ -23,10 +23,13 @@ $xdraw       = 3;
 // If no image or plan
 if ($image_ID=="" && $plan_ID=="") {
   // Search for image with empty or negative coordinate and corresponding plan
-  $sql = "SELECT image_ID, image_file, image_rank, image_description,";
-  $sql.= "image_cave_ID, image_plan_ID, image_plan_x, image_plan_y,";
-  $sql.= "cave_ID, cave_name, ";
-  $sql.= "plan_cave_ID, plan_image, plan_floor, plan_width, plan_ID ";
+  $sql = "SELECT image_ID, image_master_ID, image_cave_ID, image_plan_ID,
+                 image_medium, image_subject,
+                 image_motifs, image_description, image_file, image_date,
+                 image_notes, image_rank, image_rotate,
+                 image_plan_x, image_plan_y,
+                 cave_ID, cave_name,
+                 plan_cave_ID, plan_image, plan_floor, plan_width, plan_ID ";
   $sql.= "FROM images, caves, plans ";
   $sql.= "WHERE (image_plan_x<0 OR image_plan_y<0 or image_plan_x='' OR image_plan_y='') ";
   $sql.= "AND image_cave_ID=plan_cave_ID ";
@@ -36,10 +39,13 @@ if ($image_ID=="" && $plan_ID=="") {
 } else {
   // If plan but no image
   if ($image_ID=="") {
-    $sql = "SELECT image_ID, image_file, image_rank, image_description,";
-    $sql.= "image_cave_ID, image_plan_ID, image_plan_x, image_plan_y,";
-    $sql.= "cave_ID, cave_name, ";
-    $sql.= "plan_cave_ID, plan_image, plan_floor, plan_width, plan_ID ";
+    $sql = "SELECT image_ID, image_master_ID, image_cave_ID, image_plan_ID,
+                   image_medium, image_subject,
+                   image_motifs, image_description, image_file, image_date,
+                   image_notes, image_rank, image_rotate,
+                   image_plan_x, image_plan_y,
+                   cave_ID, cave_name,
+                   plan_cave_ID, plan_image, plan_floor, plan_width, plan_ID ";
     $sql.= "FROM images, caves, plans ";
     $sql.= "WHERE (image_plan_x<0 OR image_plan_y<0 or image_plan_x='' OR image_plan_y='') ";
     $sql.= "AND plan_ID=".$plan_ID." ";
@@ -49,10 +55,13 @@ if ($image_ID=="" && $plan_ID=="") {
     $sql.= "AND image_rank=1 ";
   // If image but no plan
   } else {
-      $sql = "SELECT image_ID, image_file, image_rank, image_description,";
-      $sql.= "image_cave_ID, image_plan_ID, image_plan_x, image_plan_y,";
-      $sql.= "cave_ID, cave_name, ";
-      $sql.= "plan_cave_ID, plan_image, plan_floor, plan_width, plan_ID ";
+      $sql = "SELECT image_ID, image_master_ID, image_cave_ID, image_plan_ID,
+                     image_medium, image_subject,
+                     image_motifs, image_description, image_file, image_date,
+                     image_notes, image_rank, image_rotate,
+                     image_plan_x, image_plan_y,
+                     cave_ID, cave_name,
+                     plan_cave_ID, plan_image, plan_floor, plan_width, plan_ID ";
       $sql.= "FROM images, caves, plans ";
       $sql.= "WHERE image_ID=".$image_ID." ";
       $sql.= "AND plan_cave_ID=cave_ID ";
@@ -64,16 +73,28 @@ if ($image_ID=="" && $plan_ID=="") {
 // Retrieve the first result
 $result = mysql_query($sql) or die (mysql_error());
 $row = mysql_fetch_object($result);
-$image_ID    = $row->image_ID;
-$image_file  = $row->image_file;
-$image_rank  = $row->image_rank;
-$image_desc  = $row->image_description;
+
+$image_ID          = $row->image_ID;
+$image_master_ID   = $row->image_master_ID;
+$image_cave_ID     = $row->image_cave_ID;
+$image_plan_ID     = $row->image_plan_ID;
+$image_medium      = $row->image_medium;
+$image_subject     = $row->image_subject;
+$image_motifs      = $row->image_motifs;
+$image_description = $row->image_description;
+$image_file        = $row->image_file;
+$image_date        = $row->image_date;
+$image_notes       = $row->image_notes;
+$image_rank        = $row->image_rank;
+$image_rotate      = $row->image_rotate;
+$image_plan_x      = $row->image_plan_x;
+$image_plan_y      = $row->image_plan_y;
+
 $cave_name   = $row->cave_name;
 $plan_image  = $row->plan_image;
 $plan_floor  = $row->plan_floor;
 $plan_width  = $row->plan_width;
-$image_cave_ID  = $row->image_cave_ID;
-$plan_ID = $row->plan_ID;
+$plan_ID     = $row->plan_ID;
 
 // Find images to plot on selected cave plan
 // Check to see if there are any images to fix
@@ -81,61 +102,67 @@ if ($image_ID=="") {
   echo '<br /><br />All images have been assigned coordinates.for this cave plan.';
 } else {
 
-  // Get all images for selected cave plan
-  $sql = "SELECT image_ID, image_cave_ID, image_file, image_rank,
-         image_description, cave_name, 
-         plan_ID, plan_cave_ID, plan_image_ID, plan_width, 
-         plan_image, image_plan_x, image_plan_y
-         FROM images, caves, plans
-         WHERE image_plan_ID = ".$plan_ID."
-         AND plan_ID = ".$plan_ID."
-         AND image_cave_ID = cave_ID
-         AND plan_cave_ID = cave_ID
-         AND image_rank = 1
-         ORDER BY image_file ASC";
-  $result = mysql_query($sql) or die (mysql_error());
-  // Create Images array
-  $Images = array();
-  $i=0;
-  while($row = mysql_fetch_array($result)){
-    // NOTE: CAVE 10 floor 1 IMAGES REPEAT
-    if ($plan_ID==10) {
-      if ($i % 2 == 0) {
-        $Images[$i] = $row;
-      }
-    } else {
-        $Images[$i] = $row;
-    }
-    $i = $i + 1;
-  }
-
-  // Get all images missing coordinates in selected cave plan
-  $sql = "SELECT image_ID, image_file, image_rank, image_description,";
-  $sql.= "image_cave_ID, image_plan_ID, image_plan_x, image_plan_y,";
-  $sql.= "cave_ID, cave_name, ";
-  $sql.= "plan_cave_ID, plan_image, plan_floor, plan_width, plan_ID ";
-  $sql.= "FROM images, caves, plans ";
-  $sql.= "WHERE (image_plan_x<0 OR image_plan_y<0 or image_plan_x='' OR image_plan_y='') ";
-  $sql.= "AND plan_ID=".$plan_ID." ";
-  $sql.= "AND image_plan_ID=".$plan_ID." ";
-  $sql.= "AND plan_cave_ID=cave_ID ";
-  $sql.= "AND image_cave_ID=plan_cave_ID ";
-  $sql.= "AND image_rank=1 ";
-  $result = mysql_query($sql) or die (mysql_error());
-  // Create Missing_images array
-  $Missing_images = array();
-  $i=0;
-  while($row = mysql_fetch_array($result)){
-    // NOTE: CAVE 10 floor 1 IMAGES REPEAT
-    if ($plan_ID==10) {
-      if ($i % 2 == 0) {
-        $Missing_images[$i] = $row;
-      }
-    } else {
-        $Missing_images[$i] = $row;
-    }
-    $i = $i + 1;
-  }
+	// Get all images for selected cave plan
+	$sql = "SELECT image_ID, image_master_ID, image_cave_ID, image_plan_ID,
+			image_medium, image_subject,
+			image_motifs, image_description, image_file, image_date,
+			image_notes, image_rank, image_rotate,
+			image_plan_x, image_plan_y,
+			cave_ID, cave_name, 
+			plan_ID, plan_cave_ID, plan_image_ID, plan_width, plan_image
+			FROM images, caves, plans
+			WHERE image_plan_ID = ".$plan_ID."
+			AND plan_ID = ".$plan_ID."
+			AND image_cave_ID = cave_ID
+			AND plan_cave_ID = cave_ID
+			AND image_rank = 1
+			ORDER BY image_file ASC";
+	$result = mysql_query($sql) or die (mysql_error());
+	// Create Images array
+	$Images = array();
+	$i=0;
+	while($row = mysql_fetch_array($result)){
+		// NOTE: CAVE 10 floor 1 IMAGES REPEAT
+		if ($plan_ID==10) {
+			if ($i % 2 == 0) {
+				$Images[$i] = $row;
+			}
+		} else {
+			$Images[$i] = $row;
+		}
+		$i = $i + 1;
+	}
+	
+	// Get all images missing coordinates in selected cave plan
+	$sql = "SELECT image_ID, image_master_ID, image_cave_ID, image_plan_ID,
+			image_medium, image_subject,
+			image_motifs, image_description, image_file, image_date,
+			image_notes, image_rank, image_rotate,
+			image_plan_x, image_plan_y,
+			cave_ID, cave_name,
+			plan_cave_ID, plan_image, plan_floor, plan_width, plan_ID ";
+	$sql.= "FROM images, caves, plans ";
+	$sql.= "WHERE (image_plan_x<0 OR image_plan_y<0 or image_plan_x='' OR image_plan_y='') ";
+	$sql.= "AND plan_ID=".$plan_ID." ";
+	$sql.= "AND image_plan_ID=".$plan_ID." ";
+	$sql.= "AND plan_cave_ID=cave_ID ";
+	$sql.= "AND image_cave_ID=plan_cave_ID ";
+	$sql.= "AND image_rank=1 ";
+	$result = mysql_query($sql) or die (mysql_error());
+	// Create Missing_images array
+	$Missing_images = array();
+	$i=0;
+	while($row = mysql_fetch_array($result)){
+		// NOTE: CAVE 10 floor 1 IMAGES REPEAT
+		if ($plan_ID==10) {
+			if ($i % 2 == 0) {
+				$Missing_images[$i] = $row;
+			}
+		} else {
+			$Missing_images[$i] = $row;
+		}
+		$i = $i + 1;
+	}
 }
 ?>
 
@@ -198,7 +225,7 @@ $(document).ready(function(){
 <?php
 if ($image_ID!="") {
 
-// Ground plan
+  // Ground plan
   echo '<div id="plan">';
   echo '<img src="'.$plan_dir.$plan_image.'" width="'.$plan_width.'";
          border="0" style="position:absolute; left:0px;"/>';
@@ -258,8 +285,15 @@ if ($image_ID!="") {
   echo '    Image ID:&nbsp;&nbsp;<input type="text" size="10"  name="image_ID" value="'.$image_ID.'">';
   echo '   <input type="submit" value="OR select image" name="submit">';
   echo '   </form>';
+// Form to select next image by ID
+  echo '   <form method="get" action='.$PHP_SELF.'?image_ID='.$image_ID.'&plan_ID=>';
+  echo '    Next:&nbsp;&nbsp;<input type="text" size="10"  name="image_ID" value="'.($image_ID+1).'">';
+  echo '   <input type="submit" value="OR select image" name="submit">';
+  echo '   </form>';
 
   echo '</div>';
+
+  echo '   <br /><br />';
 
 // Form to update image annotation entries
   echo '<form action="./insert.php" method="post">';
@@ -267,6 +301,7 @@ if ($image_ID!="") {
   echo '<div class="caption"><i>';
   echo '<input type="hidden" name="num_rows" value="'.$num_rows.'">';
   echo '<input type="hidden" name="update_image_ID" value="'.$image_ID.'">';
+  echo '<input type="hidden" name="update_image_file" value="'.$image_file.'">';
   echo 'Cave ID: <br /><input type="text" size="20"  name="update_image_cave_ID" value="'.$image_cave_ID.'">';
 
   if ($plan_floor==1) {
@@ -290,8 +325,15 @@ if ($image_ID!="") {
   echo 'Medium: <br /><input type="text" size="20" name="update_image_medium" value="'.$image_medium.'"><br />';
   echo 'Subject: <br /><input type="text" size="65" name="update_image_subject" value="'.$image_subject.'"><br />';
   echo 'Motifs: <br /><input type="text" size="65" name="update_image_motifs" value="'.$image_motifs.'"><br />';
-  echo 'Description: <br /><textarea cols="47" rows="10" name="update_image_description">'.$image_desc.'</textarea><br />';
-  echo 'Image rank: <input type="text" size="2"  name="update_image_rank" value="'.$image_rank  .'">';
+  echo 'Description: <br /><textarea cols="47" rows="10" name="update_image_description">'.$image_description.'</textarea><br />';
+  echo '<table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td>';
+  echo 'Notes: <br /><textarea cols="40" rows="1" name="update_image_notes">'.$image_notes.'</textarea><br />';
+  //echo 'File: <br /><input type="text" size="50" name="update_image_file" value="'.$image_file.'">';
+  echo '</td><td>';
+  echo 'Date: <br /><input type="text" size="20" name="update_image_date" value="'.$image_date.'"><br />';
+  echo '</td></tr></table>';
+
+  echo 'Image rank: <input type="text" size="2"  name="update_image_rank" value="'.$image_rank.'">';
 
   if ($image_rotate==0) {
      $rot0 = 'checked'; $rot1 = ''; $rot2 = ''; $rot3 = '';
@@ -314,9 +356,9 @@ if ($image_ID!="") {
   echo '2  <input type="radio" name="update_image_rotate" value="2" '.$rot2.'>';
   echo '&nbsp;&nbsp;&nbsp;&nbsp;';
   echo '3  <input type="radio" name="update_image_rotate" value="3" '.$rot3.'>';
-  echo '<br />Master image ID: <input type="text" size="2"  name="update_master_ID"       value="'.$master_ID .'">';
-  echo '&nbsp;&nbsp; x: <input type="text" size="2"  name="update_x"       value="'.$image_plan_x .'">';
-  echo '&nbsp;&nbsp; y: <input type="text" size="2"  name="update_y"       value="'.$image_plan_y .'">';
+  echo '<br />Master image ID: <input type="text" size="2"  name="update_image_master_ID" value="'.$image_master_ID.'">';
+  echo '&nbsp;&nbsp; x: <input type="text" size="2"  name="update_image_plan_x" value="'.$image_plan_x.'">';
+  echo '&nbsp;&nbsp; y: <input type="text" size="2"  name="update_image_plan_y" value="'.$image_plan_y.'">';
   echo '</i>';
   echo '</div>';
 

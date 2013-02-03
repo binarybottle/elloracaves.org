@@ -58,8 +58,8 @@ switch($cmd)
              AND image_plan_ID = plan_ID
              AND plan_floor = '".$searchfloor."'
              AND image_rank = 1
-             ORDER BY image_file ASC
-             LIMIT ".$limit;
+             ORDER BY image_file ASC";
+             //LIMIT ".$limit;
       $result = mysql_query($sql) or die (mysql_error());
       // Create Images array
       $Images = array();
@@ -99,8 +99,8 @@ switch($cmd)
               AGAINST ('$searchstring'" . $bool . ")
               AND image_rank = '1' "
               .$s_string.
-              " ORDER BY image_file ASC
-              LIMIT ".$limit;
+              " ORDER BY image_file ASC";
+              //LIMIT ".$limit;
               #ORDER BY score DESC, image_file ASC";
               #ORDER BY image_cave_ID DESC, score DESC";
       $result = mysql_query($sql) or die (mysql_error());

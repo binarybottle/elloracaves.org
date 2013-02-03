@@ -2,7 +2,7 @@
 
  // Log into MySQL server
     require_once('../../../db/elloracaves_db.php');
-    $query1  = "SELECT * FROM images ORDER BY ID";
+    $query1  = "SELECT * FROM images ORDER BY image_ID";
     $result1 = mysql_query($query1,$dbh);
     $pk      = 1;
 
@@ -11,8 +11,8 @@
        while ($row = mysql_fetch_array($result1, MYSQL_ASSOC)) {
 
                 $string = $row['image_file'];
-                $pattern = '/.*\//i';
-                $replacement = '${1}';
+                $pattern = //'/.*\//i';
+                $replacement = //'${1}';
 
                 $string1 = preg_replace($pattern, $replacement, $string);
 

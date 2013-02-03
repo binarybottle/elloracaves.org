@@ -3,7 +3,12 @@
  include_once("../../../db/elloracaves_db.php");
  include_once("../shared/header_start.php"); 
 
- $limit = 500;
+ $limit_max = 50;
+ $limit = "LIMIT 0, ".$limit_max;
+ //$limit = "";
+ if (strlen($limit) == 0) {
+   $limit_max = 1000000;
+ }
 ?>
 
 <script type="text/javascript" src="../shared/popups.js"></script>
@@ -15,13 +20,14 @@
 
 <div class="main">
 
-<h1>Annotate Ellora cave temple images</h1>
+<b>Annotate Ellora cave temple images</b> (Limit: <?php echo $limit_max; ?> at a time)
+<br />
 <br />
 
 <?php
  
 // Search form (words & range)
-   include_once("../shared/searchForm_admin.php");
+   include_once("../shared/searchForm_plan_admin.php");
 
 // Create the navigation switch
    $cmd = (isset($_GET['cmd']) ? $_GET['cmd'] : '');
@@ -29,15 +35,15 @@
    switch($cmd)
    {
       default:
-      searchForm_admin();
+      searchForm_plan_admin();
   
       break;
     
       case "search":
-        searchForm_admin();
+        searchForm_plan_admin();
     
         $searchstring = trim(mysql_real_escape_string(stripslashes($_GET['words'])));
-        $searchcave   = trim(mysql_real_escape_string(stripslashes($_GET['cave_name'])));
+        $searchplan   = trim(mysql_real_escape_string(stripslashes($_GET['plan_ID'])));
         $searchstart  = trim(mysql_real_escape_string(stripslashes($_GET['start'])));
         $searchstop   = trim(mysql_real_escape_string(stripslashes($_GET['stop'])));
 
@@ -45,28 +51,32 @@
            $searchstart = 1;
         }
         if (strlen(trim($searchstop))==0) {
-		  $searchstop = 99999; //$searchstart;
+            if ($searchstart==1) {
+              $searchstop = 99999; #$searchstart;
+            } else {
+              $searchstop = $searchstart;
+            }
         }
 
-        if (strlen(trim($searchstring))+strlen(trim($searchcave))==0) {
+        if (strlen(trim($searchstring))+strlen(trim($searchplan))==0) {
            $sql = "SELECT * FROM images
                    WHERE image_ID >= " . (int)$searchstart . 
                    " AND image_ID <= " . (int)$searchstop .
-                   " ORDER BY image_file ASC LIMIT 0,".$limit;
+                   " ORDER BY image_ID ASC ".$limit;
         }
         elseif (strlen(trim($searchstring))==0) {
            $sql = "SELECT * FROM images
-                     WHERE image_cave_ID = '".$searchcave.
+                     WHERE image_plan_ID = '".$searchplan.
                   "' AND image_ID >= " . (int)$searchstart . 
                    " AND image_ID <= " . (int)$searchstop .
-                   " ORDER BY image_file ASC LIMIT 0,".$limit;
+                   " ORDER BY image_ID ASC ".$limit;
         }
         else {
         
-           if (strlen(trim($searchcave))==0) {
+           if (strlen(trim($searchplan))==0) {
              $s_string = " ";
            } else {
-             $s_string = " AND image_cave_ID = '".$searchcave."'";
+             $s_string = " AND image_plan_ID = '".$searchplan."'";
            }
            
            switch($_GET['mode'])
@@ -79,9 +89,11 @@
                break;
            }
 
-           $sql = "SELECT image_ID, image_cave_ID, image_plan_ID, image_medium, image_subject,
+           $sql = "SELECT image_ID, image_master_ID, image_cave_ID, image_plan_ID, 
+                          image_medium, image_subject,
                           image_motifs, image_description, image_file, image_date,
-                          image_notes, image_rank, image_rotate,
+                          image_notes, image_rank, image_rotate, 
+                          image_plan_x, image_plan_y,
                    MATCH(image_medium, image_subject, image_motifs,
                          image_description, image_notes)
                    AGAINST ('$searchstring'" . $bool . ") AS score FROM images
@@ -89,9 +101,8 @@
                                image_description, image_notes)
                    AGAINST ('$searchstring'" . $bool . ")
                    AND image_ID >= " . (int)$searchstart . "
-                   AND image_ID <= " . (int)$searchstop . " " . $s_string . 
-                   " ORDER BY image_file ASC, score DESC LIMIT 0,".$limit;
-                 //" ORDER BY image_cave_ID DESC, score DESC";
+                   AND image_ID <= " . (int)$searchstop . " " . $s_string
+                   ." ORDER BY image_ID ASC, score DESC ".$limit;
         }
 
         $result = mysql_query($sql) or die (mysql_error());
@@ -101,7 +112,7 @@
         if ($num_rows==1) {
            echo '<span class="font80"><i>Found ' . $num_rows . ' result:  </i></span><br />';
         }
-        elseif ($num_rows>=$limit) {
+        elseif ($num_rows>=$limit_max) {
            echo '<span class="font80"><i>Found at least ' . $num_rows . ' results (ordered by file name):  </i></span><br />';
         }
         else {
@@ -116,25 +127,25 @@
       echo '<form action="./insert.php" method="post">';
 
    // Loop through search results      
+      echo '<input type="hidden" name="num_rows" value="'.$num_rows.'">';
       $i=1;
       while($row = mysql_fetch_object($result))
       {
-         $image_ID        = $row->image_ID;
-         $master_ID       = $row->image_master_ID;
-         $image_cave_ID   = $row->image_cave_ID;
-         $image_file      = $row->image_file;
-         $image_rank      = $row->image_rank;
-         $image_desc      = $row->image_description;
-         $image_plan_ID   = $row->image_plan_ID;
-         $image_plan_x    = $row->image_plan_x;
-         $image_plan_y    = $row->image_plan_y;
-
-         $image_medium    = $row->image_medium;
-         $image_subject   = $row->image_subject;
-         $image_motifs    = $row->image_motifs;
-         $image_date      = $row->image_date;
-         $image_notes     = $row->image_notes;
-         $image_rotate    = $row->image_rotate;
+         $image_ID          = $row->image_ID;
+         $image_master_ID   = $row->image_master_ID;
+         $image_cave_ID     = $row->image_cave_ID;
+         $image_plan_ID     = $row->image_plan_ID;
+         $image_medium      = $row->image_medium;
+         $image_subject     = $row->image_subject;
+         $image_motifs      = $row->image_motifs;
+         $image_description = $row->image_description;
+         $image_file        = $row->image_file;
+         $image_date        = $row->image_date;
+         $image_notes       = $row->image_notes;
+         $image_rank        = $row->image_rank;
+         $image_rotate      = $row->image_rotate;
+         $image_plan_x      = $row->image_plan_x;
+         $image_plan_y      = $row->image_plan_y;
 
          $sql_loop = "SELECT plan_floor FROM plans WHERE plan_ID = '".$image_plan_ID."'";
          $result_loop = mysql_query($sql_loop) or die (mysql_error());
@@ -164,8 +175,9 @@
          echo '<div class="font80"><i>';
          echo '<input type="hidden" name="num_rows" value="'.$num_rows.'">';
          echo '<input type="hidden" name="update_image_ID'.$i.'" value="'.$image_ID.'">';
+         echo '<input type="hidden" name="update_image_file'.$i.'" value="'.$image_file.'">';
          echo '<table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td>';
-         echo 'Cave ID:     <br /><input type="text" size="20"  name="update_image_cave_ID'.$i.'"     value="'.$image_cave_ID      .'">';
+         echo 'Cave ID (plan '.$image_plan_ID.'):     <br /><input type="text" size="20"  name="update_image_cave_ID'.$i.'"     value="'.$image_cave_ID      .'">';
          echo '</td><td>';
 
          if ($plan_floor==1) {
@@ -191,7 +203,13 @@
          echo '</td></tr></table>';
          echo 'Subject:     <br /><input type="text" size="65" name="update_image_subject'.$i.'"    value="'.$image_subject     .'"><br />';
          echo 'Motifs:      <br /><input type="text" size="65" name="update_image_motifs'.$i.'"     value="'.$image_motifs      .'"><br />';
-         echo 'Description: <br /><textarea cols="75" rows="3" name="update_image_description'.$i.'">'.$image_desc.'</textarea><br />';
+         echo 'Description: <br /><textarea cols="75" rows="3" name="update_image_description'.$i.'">'.$image_description.'</textarea><br />';
+         echo '<table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td>';
+         echo 'Notes: <br /><textarea cols="40" rows="1" name="update_image_notes'.$i.'">'.$image_notes.'</textarea><br />';
+         //echo 'File:      <br /><input type="text" size="50" name="update_image_file'.$i.'"     value="'.$image_file      .'">';
+         echo '</td><td>';
+         echo 'Date:      <br /><input type="text" size="20" name="update_image_date'.$i.'"     value="'.$image_date      .'"><br />';
+         echo '</td></tr></table>';
          echo 'Image rank:        <input type="text" size="2"  name="update_image_rank'.$i.'"       value="'.$image_rank  .'">';
 
          if ($image_rotate==0) {
@@ -217,9 +235,9 @@
          echo '2  <input type="radio" name="update_image_rotate'.$i.'" value="2" '.$rot2.'>';
          echo '&nbsp;&nbsp;&nbsp;&nbsp;';
          echo '3  <input type="radio" name="update_image_rotate'.$i.'" value="3" '.$rot3.'>';
-         echo '<br />Master image ID: <input type="text" size="2"  name="update_master_ID'.$i.'"       value="'.$master_ID .'">';
-         echo '&nbsp;&nbsp; x: <input type="text" size="2"  name="update_x'.$i.'"       value="'.$image_plan_x .'">';
-         echo '&nbsp;&nbsp; y: <input type="text" size="2"  name="update_y'.$i.'"       value="'.$image_plan_y .'">';
+         echo '<br />Master image ID: <input type="text" size="2"  name="update_image_master_ID'.$i.'"       value="'.$image_master_ID .'">';
+         echo '&nbsp;&nbsp; x: <input type="text" size="2"  name="update_image_plan_x'.$i.'"       value="'.$image_plan_x .'">';
+         echo '&nbsp;&nbsp; y: <input type="text" size="2"  name="update_image_plan_y'.$i.'"       value="'.$image_plan_y .'">';
 
          echo '</i>';
 
