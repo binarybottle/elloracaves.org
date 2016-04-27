@@ -22,15 +22,17 @@ $default_plan_width = $scale*480;
 <title>Ellora Cave Temples</title>
 
 <div class="text_block">
+<br />
 <font color="orange">NOTE: Internet Explorer is not supported.</font>
 <br /><br /><br />
 <b>Search help:</b>
 <br /><br />
 Anything <font color="#487a14">green</font> is a link and can be clicked or moused over.<br />
 <br />
-There are two ways to search for images:<br />
+There are three ways to search for images:<br />
 1. Click on a cave number on the map above to view images of that cave.<br />
-2. Or, type in <b>Keywords</b> and/or select a <b>Cave</b> from the search bar, then click "<b>Search</b>".
+2. Search through the thumbnails at the bottom to view images from the same floor.<br />
+3. Type in <b>Keywords</b> and/or select a <b>Cave</b> from the search bar, then click "<b>Search</b>".
  <br />
  <br />
  <i>Keyword examples:</i><br />

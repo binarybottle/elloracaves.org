@@ -5,7 +5,7 @@
   the comprehensive documentation
  </div-->
  <div id="links">
-  <a href="./index.php">home</a>
+  <a href="./about.php">about</a>
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <a href="./help.php">help</a>
  </div>

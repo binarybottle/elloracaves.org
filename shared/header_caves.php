@@ -15,6 +15,9 @@
   <meta name="dc.identifier" content="http://elloracaves.org">
   <link rel="stylesheet" type="text/css" href="./shared/style.css" />
   <link rel="stylesheet" type="text/css" href="./shared/cave_numbers.css" />
+  <link rel="icon" type="image/png" sizes="96x96" href="./shared/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="./shared/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="./shared/icons/favicon-16x16.png">
 
 <script type="text/javascript" src="./shared/jquery-1.4.4.min.js"></script>
 <script language="javascript" type="text/javascript" src="./shared/raphael-min.js"></script> 
