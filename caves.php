@@ -1,7 +1,7 @@
 <?php
-$image_dir   = "http://media.elloracaves.org/images/caves_360px/";
-$thumb_dir   = "http://media.elloracaves.org/images/caves_thumbs/";
-$plan_dir    = "http://media.elloracaves.org/images/plans/";
+$image_dir   = "https://media.elloracaves.org/images/caves_360px/";
+$thumb_dir   = "https://media.elloracaves.org/images/caves_thumbs/";
+$plan_dir    = "https://media.elloracaves.org/images/plans/";
 
 $default_cave_ID = '10';
 $default_plan_floor = 1;
@@ -26,7 +26,7 @@ include("./shared/header_caves.php");
 ?>
 
 <body style="background-color: black;
-             background-image:url(http://media.elloracaves.org/images/maps/map_260x1024px_gradient.png);
+             background-image:url(https://media.elloracaves.org/images/maps/map_260x1024px_gradient.png);
              background-repeat:no-repeat;
              background-position: top left;">
 
@@ -53,7 +53,7 @@ if ($plan_image_ID > 0 && strlen(trim($searchstring))==0) {
     if (sizeof($floors) > 1) {
         echo '<div class="miniplans">';
         for ($ifloor = 0; $ifloor < sizeof($floors); $ifloor++) {
-            echo '<a href="http://elloracaves.org/caves.php?cmd=search&words=&imageID=&cave_ID='.$searchcave.'&plan_floor='.($ifloor+1).'">';
+            echo '<a href="https://elloracaves.org/caves.php?cmd=search&words=&imageID=&cave_ID='.$searchcave.'&plan_floor='.($ifloor+1).'">';
             echo '<img src="'.$plan_dir.$plan_images[$ifloor].'" width="'.$miniplan_width.'"/><br />';
             echo '</a>';
             echo '<div class="miniplan_title">floor '.$floors[$ifloor][0].'</div><br /><br /><br />';
@@ -109,7 +109,7 @@ echo '<div class="topbox" style="float:left;">';
                     $x0 = $scale_plans*$X;
                     $y0 = $scale_plans*$Y;
                     if ($row['image_ID'] == $row['image_master_ID']) {
-                        echo '<img src="http://media.elloracaves.org/images/decor/marker_'.$marker_state.'.png"
+                        echo '<img src="https://media.elloracaves.org/images/decor/marker_'.$marker_state.'.png"
                             id="marker'.$row["image_ID"].'" rel="target'.$row["image_ID"].'"
                             border="0" width="'.$marker_size.'" height="'.$marker_size.'"
                             style="position:absolute; top:'.$y0.'px; left:'.$x0.'px;" />
@@ -175,7 +175,7 @@ echo '<div class="topbox" style="float:left;">';
                 $scroll_image_next = $scroll_image_number + 1;
                 if ($scroll_image_prev > -1) {
                     echo '<span style="position:absolute; bottom:0px; left:0px;">';
-                    echo '<a href="http://elloracaves.org/caves.php?cmd=search&words='.$searchstring;
+                    echo '<a href="https://elloracaves.org/caves.php?cmd=search&words='.$searchstring;
                     echo '&cave_ID='.$searchcave.'&plan_floor='.$searchfloor;
                     echo '&image_ID='.$scroll_image_IDs[$scroll_image_prev].'">';
                     echo '<b><<</b>';
@@ -187,7 +187,7 @@ echo '<div class="topbox" style="float:left;">';
                 echo '</span>';
                 if ($scroll_image_next < sizeof($scroll_image_IDs)) {
                     echo '<span style="position:absolute; bottom:0px; right:0px;">';
-                    echo '<a href="http://elloracaves.org/caves.php?cmd=search&words='.$searchstring;
+                    echo '<a href="https://elloracaves.org/caves.php?cmd=search&words='.$searchstring;
                     echo '&cave_ID='.$searchcave.'&plan_floor='.$searchfloor;
                     echo '&image_ID='.$scroll_image_IDs[$scroll_image_next].'">';
                     echo '<b>>></b>';
@@ -239,7 +239,7 @@ echo '<div class="topbox" style="float:left;">';
     // Thumbnails
     foreach ($Images as &$row) {
         echo '<span id="thumb_'.$row["image_ID"].'">';
-        echo '<a href="http://elloracaves.org/caves.php?cmd=search&words='.$searchstring;
+        echo '<a href="https://elloracaves.org/caves.php?cmd=search&words='.$searchstring;
         echo '&cave_ID='.$searchcave.'&plan_floor='.$searchfloor.'&image_ID='.$row['image_ID'].'">';
     
         if ($row['image_ID']==$start_image_ID) {

@@ -1,5 +1,5 @@
 <?php
 
-   header( 'Location: http://elloracaves.org/about.php' ) ;
+   header( 'Location: https://elloracaves.org/caves.php' ) ;
 
 ?>
