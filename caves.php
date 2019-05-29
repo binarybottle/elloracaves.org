@@ -8,7 +8,7 @@ $default_plan_floor = 1;
 $miniplan_width = 100;
 $image_width = 360;
 $caption_left = 400;
-$thumbs_shift_down = 20;
+$thumbs_shift_down = 550; #20;  getimagesize doesn't accept https!
 $thumb_height = 100;
 $scale_plans = 0.75;
 $default_plan_width = $scale_plans*480;
@@ -83,7 +83,14 @@ echo '<div class="topbox" style="float:left;">';
             }
 
             // Markers on plan
-            $plan_size = getimagesize($plan_dir.$plan_image);
+	    $url = $plan_dir.$plan_image;
+            $url = trim($url); // Get rid of any accidental whitespace
+            $parsed = parse_url($url); // analyse the URL
+            if (isset($parsed['scheme']) && strtolower($parsed['scheme']) == 'https') {
+              // If it is https, change it to http
+              $url = 'http://'.substr($url,8);
+            }
+            $plan_size = getimagesize($url);
             $plan_height = $plan_size[1];
             $plan_height = $scale_plans * $plan_height;
             echo '<div>
