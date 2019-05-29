@@ -2,7 +2,7 @@
 include("../../../db/elloracaves_db.php");
 
 // Image repository
-   $image_repository = "http://media.elloracaves.org/images/caves_360px/";
+   $image_repository = "http://elloracaves.org/images/caves_360px/";
 	
 // Search form
    include_once("../shared/searchForm.php");

@@ -57,10 +57,10 @@
     foreach ($Images as &$row) {
       echo '$("img#marker'.$row["image_ID"].'").hover(
       function() {
-        $(this).attr("src","http://media.elloracaves.org/images/decor/marker_on.png");
+        $(this).attr("src","http://elloracaves.org/images/decor/marker_on.png");
       }, 
       function() {
-        $(this).attr("src","http://media.elloracaves.org/images/decor/marker_off.png");
+        $(this).attr("src","http://elloracaves.org/images/decor/marker_off.png");
       });';
 */
     // Postload images:

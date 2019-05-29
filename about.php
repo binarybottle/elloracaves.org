@@ -1,12 +1,12 @@
 <?php
-$image_dir   = "https://media.elloracaves.org/images/caves_360px/";
-$thumb_dir   = "https://media.elloracaves.org/images/caves_thumbs/";
-$plan_dir    = "https://media.elloracaves.org/images/plans/";
+$image_dir   = "https://elloracaves.org/images/caves_360px/";
+$thumb_dir   = "https://elloracaves.org/images/caves_thumbs/";
+$plan_dir    = "https://elloracaves.org/images/plans/";
 
 include("./shared/header_home.php");
 ?>
 
-<body style="background-image:url(https://media.elloracaves.org/images/maps/map_260x1024px_gradient.png);
+<body style="background-image:url(https://elloracaves.org/images/maps/map_260x1024px_gradient.png);
              background-repeat:no-repeat;
              background-position: top left;
              background-color: black;">
@@ -14,11 +14,11 @@ include("./shared/header_home.php");
 <title>Ellora Cave Temples</title>
 
 <!-- Disappearing map overlay -->
-<img src="https://media.elloracaves.org/images/maps/map_260x1024px_photo.png" alt="map" border="0" class="map_overlay" />
+<img src="https://elloracaves.org/images/maps/map_260x1024px_photo.png" alt="map" border="0" class="map_overlay" />
 
 <?php include("./shared/banner_home.php"); ?>
 
-<!--img class="home_image" align="center" src="https://media.elloracaves.org/images/decor/home_c5_H7.jpg" width="840px" /-->
+<!--img class="home_image" align="center" src="https://elloracaves.org/images/decor/home_c5_H7.jpg" width="840px" /-->
 
 <div class="text_block">
 
@@ -57,7 +57,7 @@ ArtStor</a> and the Indian government.
 <tr class="row-odd"><td>&nbsp;</td>
 <td>&nbsp;</td>
 </tr>
-<tr class="row-even"><td><img alt="pic2" src="https://media.elloracaves.org/images/people/DeepanjanaKlein.jpg" style="width: 200px;" /></td>
+<tr class="row-even"><td><img alt="pic2" src="https://elloracaves.org/images/people/DeepanjanaKlein.jpg" style="width: 200px;" /></td>
 <td>Dr. Deepanjana Klein is the International Head of Department for Modern and Contemporary Indian Art at Christie&apos;s. Prior to joining Christie&apos;s she curated exhibitions of contemporary Indian art as an independent curator in New York City.
 Deepanjana has a Ph.D. in Indian Art History from De Montfort University in England and has taught art history, theory, and aesthetics at the Leicester School of Architecture in England and at the Kamla Raheja Vidyanidhi Institute for Architecture and Environmental Studies in Mumbai. Her publications include contributions to the Encyclopaedia of Sculptures on the topics of modern and contemporary Indian sculpture (Fitzroy Dearborn Publishers, 2004) and essays on contemporary Indian art. She is the recipient of several awards, including a grant from the Mellon Foundation (ArtStor) for photo documentation of the Ellora cave temples, the J.N. Tata Endowment for the Higher Education of Indians, and the Nehru Trust for the Indian Collections at the Victoria &amp; Albert Museum.
 </td>
@@ -73,7 +73,7 @@ Deepanjana has a Ph.D. in Indian Art History from De Montfort University in Engl
 <tr class="row-odd"><td>&nbsp;</td>
 <td>&nbsp;</td>
 </tr>
-<tr class="row-even"><td><img alt="pic3" src="https://media.elloracaves.org/images/people/TristanBruck.jpg" style="width: 200px;" /></td>
+<tr class="row-even"><td><img alt="pic3" src="https://elloracaves.org/images/people/TristanBruck.jpg" style="width: 200px;" /></td>
 <td>Tristan Bruck joined the team in 2011 to work on the ground plans of the caves and has been responsible for assigning coordinates for each sculpture on all the floorplans. Tristan is a Specialist at Christie&apos;s. Prior to joining Christie&apos;s, he worked at The Pace Gallery in New York.
 Tristan holds a Bachelor&apos;s degree in Art History from Wesleyan University and furthered his studies at the School of Oriental and African Studies in London. He holds a Master&apos;s degree in Modern Art, Connoisseurship, and History of the Art Market from Christie&apos;s Education in New York.
 </td>
@@ -81,7 +81,7 @@ Tristan holds a Bachelor&apos;s degree in Art History from Wesleyan University a
 <tr class="row-odd"><td>&nbsp;</td>
 <td>&nbsp;</td>
 </tr>
-<tr class="row-even"><td><img alt="pic3" src="https://media.elloracaves.org/images/people/ElloraKlein.jpg" style="width: 200px;" /></td>
+<tr class="row-even"><td><img alt="pic3" src="https://elloracaves.org/images/people/ElloraKlein.jpg" style="width: 200px;" /></td>
 <td>Ellora Klein was in third grade when she assisted in the photography of the caves. She is engaged in many activities, including reading, running, racquetball, and art.
 </td>
 </tr>
@@ -91,7 +91,7 @@ Tristan holds a Bachelor&apos;s degree in Art History from Wesleyan University a
 <tr class="row-odd"><td>&nbsp;</td>
 <td>&nbsp;</td>
 </tr>
-<tr class="row-even"><td><img alt="pic7" src="https://media.elloracaves.org/images/people/WalterSpink.jpg" style="width: 200px;" /></td>
+<tr class="row-even"><td><img alt="pic7" src="https://elloracaves.org/images/people/WalterSpink.jpg" style="width: 200px;" /></td>
 <td>
 We would like to give our great friend and mentor, Professor Walter Spink, our sincerest gratitude!
 </td>
@@ -102,7 +102,7 @@ We would like to give our great friend and mentor, Professor Walter Spink, our s
 <tr class="row-odd"><td>&nbsp;</td>
 <td>&nbsp;</td>
 </tr>
-<tr class="row-even"><td><img alt="pic7" src="https://media.elloracaves.org/images/people/surprised.jpg" style="width: 200px;" /></td>
+<tr class="row-even"><td><img alt="pic7" src="https://elloracaves.org/images/people/surprised.jpg" style="width: 200px;" /></td>
 <td>
 <a href="./caves.php">Return to the Caves</a>
 </td>

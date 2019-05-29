@@ -12,7 +12,7 @@ if ($searchcave<10) {
 }
 if ($default_cave_ID != '0' && strlen($searchcave)>0) {
   echo '<a href="'.$url.$searchcave.'&plan_floor=1" id="c'.$searchcave.'">
-        <img src="http://media.elloracaves.org/images/decor/marker_number_on_20px.png" id="marker_number"
+        <img src="http://elloracaves.org/images/decor/marker_number_on_20px.png" id="marker_number"
              border="0" width="'.$msize.'" height="'.$msize.'" style="position:absolute; left:'.$mleft.'px; top:'.$mtop.'px;" />
   </a>';
 }

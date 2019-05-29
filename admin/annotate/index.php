@@ -1,5 +1,5 @@
 <?php 
- $image_repository = "https://media.elloracaves.org/images/caves_360px/";
+ $image_repository = "https://elloracaves.org/images/caves_360px/";
  include_once("../../../db/elloracaves_db.php");
  include_once("../shared/header_start.php"); 
 

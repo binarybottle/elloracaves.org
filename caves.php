@@ -1,7 +1,7 @@
 <?php
-$image_dir   = "https://media.elloracaves.org/images/caves_360px/";
-$thumb_dir   = "https://media.elloracaves.org/images/caves_thumbs/";
-$plan_dir    = "https://media.elloracaves.org/images/plans/";
+$image_dir   = "https://elloracaves.org/images/caves_360px/";
+$thumb_dir   = "https://elloracaves.org/images/caves_thumbs/";
+$plan_dir    = "https://elloracaves.org/images/plans/";
 
 $default_cave_ID = '10';
 $default_plan_floor = 1;
@@ -26,7 +26,7 @@ include("./shared/header_caves.php");
 ?>
 
 <body style="background-color: black;
-             background-image:url(https://media.elloracaves.org/images/maps/map_260x1024px_gradient.png);
+             background-image:url(https://elloracaves.org/images/maps/map_260x1024px_gradient.png);
              background-repeat:no-repeat;
              background-position: top left;">
 
@@ -109,7 +109,7 @@ echo '<div class="topbox" style="float:left;">';
                     $x0 = $scale_plans*$X;
                     $y0 = $scale_plans*$Y;
                     if ($row['image_ID'] == $row['image_master_ID']) {
-                        echo '<img src="https://media.elloracaves.org/images/decor/marker_'.$marker_state.'.png"
+                        echo '<img src="https://elloracaves.org/images/decor/marker_'.$marker_state.'.png"
                             id="marker'.$row["image_ID"].'" rel="target'.$row["image_ID"].'"
                             border="0" width="'.$marker_size.'" height="'.$marker_size.'"
                             style="position:absolute; top:'.$y0.'px; left:'.$x0.'px;" />

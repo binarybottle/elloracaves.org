@@ -12,7 +12,7 @@
 2. Add to bottom of /private/etc/hosts
 
 127.0.0.1       elloracaves.org
-127.0.0.1       media.elloracaves.org
+127.0.0.1       elloracaves.org
 
 
 3. Add to /Applications/MAMP/conf/apache/httpd.conf
@@ -29,6 +29,6 @@ NameVirtualHost *
    ServerName elloracaves.org
 </VirtualHost>
 <VirtualHost *:80>
-   DocumentRoot "/Applications/MAMP/htdocs/media.elloracaves.org"
-   ServerName media.elloracaves.org
+   DocumentRoot "/Applications/MAMP/htdocs/elloracaves.org"
+   ServerName elloracaves.org
 </VirtualHost>

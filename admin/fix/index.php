@@ -5,9 +5,9 @@ $plan_ID = mysql_escape_string($_GET['plan_ID']);
 $image_ID = mysql_escape_string($_GET['image_ID']);
 
 // Paths and database
-$image_dir = "http://media.elloracaves.org/images/caves_360px/";
-$thumb_dir = "http://media.elloracaves.org/images/caves_thumbs/";
-$plan_dir = "http://media.elloracaves.org/images/plans/";
+$image_dir = "http://elloracaves.org/images/caves_360px/";
+$thumb_dir = "http://elloracaves.org/images/caves_thumbs/";
+$plan_dir = "http://elloracaves.org/images/plans/";
 include_once("../../../db/elloracaves_db.php");
 
 // Settings
@@ -241,7 +241,7 @@ if ($image_ID!="") {
     $y0 = $Y[0];
     if ($x0>0 && $y0>0) {
       // Standing marker:
-      echo '<img src="http://media.elloracaves.org/images/decor/marker_on.png"
+      echo '<img src="http://elloracaves.org/images/decor/marker_on.png"
             id="marker'.$row["image_ID"].'"
             border="0" width="'.$marker_size1.'" height="'.$marker_size1.'"
             style="position:absolute;
