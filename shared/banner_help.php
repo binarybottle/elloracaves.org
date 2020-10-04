@@ -5,9 +5,9 @@
   the comprehensive documentation
  </div-->
  <div id="links">
-  <a href="./about.php">about</a>
+  <a href="./about.php">caves</a>
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <a href="./help.php">help</a>
+  <a href="./about.php">about</a>
  </div>
 </div>
 

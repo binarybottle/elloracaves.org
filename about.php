@@ -40,7 +40,7 @@ Ellora is a site of outstanding cave temples, datable between c. ad 575 and the 
 Dr. Deepanjana D. Klein and Dr. <a href="https://binarybottle.com" target=“_”>Arno Klein</a> have digitized their unique archive of photographic documentation of the more than 30 rock-cut cave temples at Ellora.  The approximately 2,500 black-and-white and approximately 4,500 color photographs of the Buddhist, Hindu and Jain cave shrines at Ellora have been identified and annotated and have been made available on the website.
 <br />
 <br />
-This project has received funding from <a href="https://www.artstor.org" target=“_”>
+This project has received funding from <a href="https://www.artstor.org/collection/deepanjana-danda-klein-and-arno-klein-cave-temples-ellora-india/" target=“_”>
 ArtStor</a> and the Indian government.
 <br />
 <table border="0" class="docutils">
@@ -93,7 +93,7 @@ Tristan holds a Bachelor&apos;s degree in Art History from Wesleyan University a
 </tr>
 <tr class="row-even"><td><img alt="pic7" src="https://elloracaves.org/images/people/WalterSpink.jpg" style="width: 200px;" /></td>
 <td>
-We would like to give our great friend and mentor, Professor Walter Spink, our sincerest gratitude!
+This project would have never happened without the love and support of our dear friend and mentor, the late Professor Walter Spink.
 </td>
 </tr>
 <tr class="row-odd"><td>&nbsp;</td>

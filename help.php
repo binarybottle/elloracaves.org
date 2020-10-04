@@ -1,6 +1,6 @@
 <?php
 include("../db/elloracaves_db.php");
-include("./shared/header_caves.php");
+include("./shared/header_help.php");
 
 $image_dir   = "https://elloracaves.org/images/caves/";
 $thumb_dir   = "https://elloracaves.org/images/caves_thumbs/";

@@ -34,6 +34,16 @@ include("./shared/header_caves.php");
 
 <?php
 
+print "<br><br><br><br><br>";
+print "<br><br><br><br><br>";
+print "<br><br><br><br><br>";
+print "<br><br><br><br><br>";
+print "searchstring= " . $searchstring . "<br>";
+print "result= " . $result . "<br>";
+print "CAVE=" . $searchcave . "<br>";
+print "FLOOR= " . $searchfloor . "<br>";
+print "plan_image_ID=" . $plan_image_ID  . "<br>";
+
 
 // Mini floorplans
 // If there is a plan image, mini ground plans
@@ -42,11 +52,12 @@ if ($plan_image_ID > 0 && strlen(trim($searchstring))==0) {
     $sql = "SELECT plan_floor
          FROM plans
          WHERE plan_cave_ID = '".$searchcave."'";
-    $result = mysql_query($sql) or die (mysql_error());
+    $result = mysqli_query($link,$sql) or die (mysql_error());
+
     // Create floors array
     $floors = array();
     $i=0;
-    while($row = mysql_fetch_array($result)){
+    while($row = mysqli_fetch_array($result)){
         $floors[$i] = $row;
         $i = $i + 1;
     }
@@ -67,9 +78,8 @@ if ($plan_image_ID > 0 && strlen(trim($searchstring))==0) {
 echo '<div class="mainbox">';
 echo '<div class="topbox" style="float:left;">';
 
-
-    // Plot plan and main image above thumbnails if no search or if found image
-    if (strlen(trim($searchstring))==0 || strlen($searchimage)>0) { 
+// Plot plan and main image above thumbnails if no search or if found image
+if (strlen(trim($searchstring))==0 || strlen($searchimage)>0) { 
 
         // If there is a plan image
         if ($plan_image_ID > 0) {
@@ -219,32 +229,34 @@ echo '<div class="topbox" style="float:left;">';
         echo '</div>';  // slides
         echo '</div>';  // slidebox
         echo '</div>';  // topbox
-    } else {
-        $thumbs_top = 0;
-    }
+} else {
+    $thumbs_top = 0;
+}
 
 
-    // Thumb box (thumbnails)
-    echo '<div class="thumbbox" style="position:absolute; top:'.($max_height + $thumbs_shift_down).'px;">';
+// Thumb box (thumbnails)
+echo '<div class="thumbbox" style="position:absolute; top:'.($max_height + $thumbs_shift_down).'px;">';
 //    echo '<div class="thumbbox" style="float:left;">';  // (thumbs cover main image if bigger than plan)
-    echo '<br />'.count($Images).' result';
-    if (count($Images)!=1) { echo 's'; }
-    if (strlen(trim($searchstring)) > 0) {
+echo '<br />'.count($Images).' result';
+if (count($Images)!=1) {
+        echo 's'; 
+}
+if (strlen(trim($searchstring)) > 0) {
         echo ' with search string "<i>'.$searchstring.'</i>"';
-    } 
-    if (strlen($searchcave) > 0) {
+} 
+if (strlen($searchcave) > 0) {
         $sql = "SELECT cave_name
          FROM caves
          WHERE cave_ID = '".$searchcave."'";
-        $result = mysql_query($sql) or die (mysql_error());
-        $row = mysql_fetch_array($result);
+        $result = mysqli_query($link,$sql) or die (mysql_error());
+        $row = mysqli_fetch_array($result);
         $cave_name = $row['cave_name'];
         echo '<i> in </i> <b> '.$cave_name.'</b>'; // , floor '.$searchfloor;
-    }
-    echo ':<br />';
+}
+echo ':<br />';
 
-    // Thumbnails
-    foreach ($Images as &$row) {
+// Thumbnails
+foreach ($Images as &$row) {
         echo '<span id="thumb_'.$row["image_ID"].'">';
         echo '<a href="https://elloracaves.org/caves.php?cmd=search&words='.$searchstring;
         echo '&cave_ID='.$searchcave.'&plan_floor='.$searchfloor.'&image_ID='.$row['image_ID'].'">';
@@ -257,10 +269,10 @@ echo '<div class="topbox" style="float:left;">';
         echo '<img src="' . $thumb_dir . $row['image_file'] . '" height="'.$thumb_height.'" border="'.$border_width.'"/></a>';
         echo ' ';
         echo '</span>';
-    } 
+} 
     
-    echo '</div>';  // thumbbox
-    echo '</div>';  // mainbox
+echo '</div>';  // thumbbox
+echo '</div>';  // mainbox
 
 
 include("./shared/footer.php"); 

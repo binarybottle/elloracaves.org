@@ -62,11 +62,11 @@ switch($cmd)
              AND image_rank = 1
              ORDER BY image_file ASC";
              //LIMIT ".$limit;
-      $result = mysql_query($sql) or die (mysql_error());
+      $result = mysqli_query($link,$sql) or die (mysql_error());
       // Create Images array
       $Images = array();
       $i=0;
-      while($row = mysql_fetch_array($result)){
+      while($row = mysqli_fetch_array($result)){
         $Images[$i] = $row;
         $i = $i + 1;
       }
@@ -105,11 +105,11 @@ switch($cmd)
               //LIMIT ".$limit;
               #ORDER BY score DESC, image_file ASC";
               #ORDER BY image_cave_ID DESC, score DESC";
-      $result = mysql_query($sql) or die (mysql_error());
+      $result = mysqli_query($link,$sql) or die (mysql_error());
       // Create Images array
       $Images = array();
       $i=0;
-      while($row = mysql_fetch_array($result)){
+      while($row = mysqli_fetch_array($result)){
 /*
         // Determine floor
         $sql2 = 'SELECT image_ID, image_cave_ID, image_file, image_rank, image_plan_ID, image_date,
@@ -122,9 +122,9 @@ switch($cmd)
                 AND plan_cave_ID = '.$row['image_cave_ID'].'
                 AND image_plan_ID = '.$row['image_plan_ID'].'
                 AND image_rank = 1';
-        $result2 = mysql_query($sql2) or die (mysql_error());
+        $result2 = mysqli_query($link,$sql2) or die (mysql_error());
         // Create Images array
-        while($row2 = mysql_fetch_array($result2)) {
+        while($row2 = mysqli_fetch_array($result2)) {
           if ($row2['image_ID'] == $row['image_ID']) {
             $row['plan_ID'] = $row2['plan_ID'];
             break;
@@ -150,8 +150,8 @@ if (strlen($searchimage)>0) {
           AND image_plan_ID = plan_ID
           AND image_rank = 1
           AND image_ID = "'.$start_image_ID.'"';
-  $result = mysql_query($sql) or die (mysql_error());
-  while($row = mysql_fetch_array($result)){
+  $result = mysqli_query($link,$sql) or die (mysql_error());
+  while($row = mysqli_fetch_array($result)){
     $plan_ID = $row['plan_ID'];
     $plan_image_ID = $row['plan_image_ID'];
     $plan_image = $row['plan_image'];
@@ -175,10 +175,10 @@ if (strlen($searchimage)>0) {
 // Select all floor plans for the cave
 $sql = 'SELECT plan_image FROM plans
         WHERE plan_cave_ID = "'.$searchcave.'"';
-$result = mysql_query($sql) or die (mysql_error());
+$result = mysqli_query($link,$sql) or die (mysql_error());
 $plan_images = array();
 $irow = 0;
-while($row = mysql_fetch_array($result)){
+while($row = mysqli_fetch_array($result)){
   $plan_images[$irow] = $row['plan_image'];
   $irow = $irow + 1;
 }

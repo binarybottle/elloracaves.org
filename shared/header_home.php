@@ -44,11 +44,11 @@ if ($preload_plans==1) {
             AND plan_ID = cave_ID
             AND image_rank = 1
             AND plan_image_ID = image_ID';
-  $resultPL = mysql_query($sqlPL) or die (mysql_error());
+  $resultPL = mysqli_query($link,$sqlPL) or die (mysql_error());
   // Create JS array: Array('image_1.png', 'image_2.png', 'image_3.png');
   $array_string = '';
   $i0 = 0;
-  while($rowPL = mysql_fetch_array($resultPL)){
+  while($rowPL = mysqli_fetch_array($resultPL)){
       $i0 = $i0 + 1;
       if ($i0 > 1) {
         $array_string .= ',';
@@ -67,8 +67,8 @@ if ($preload_plans==1) {
               FROM images
               WHERE image_cave_ID = 10
               AND image_rank = 1';
-    $resultPL2 = mysql_query($sqlPL2) or die (mysql_error());
-    while($rowPL2 = mysql_fetch_array($resultPL2)){
+    $resultPL2 = mysqli_query($link,$sqlPL2) or die (mysql_error());
+    while($rowPL2 = mysqli_fetch_array($resultPL2)){
         $array_string .= ',"'.$image_dir.$rowPL2["image_file"].'",';
         $array_string .= '"'.$thumb_dir.$rowPL2["image_file"].'"';
     }

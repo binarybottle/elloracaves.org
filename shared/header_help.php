@@ -23,7 +23,7 @@
 <script language="javascript" type="text/javascript" src="./shared/raphael-min.js"></script> 
 
 <?php include("./shared/popup.js"); ?>
-<?php include("./shared/banner_caves.php"); // Calls search.php ?>
+<?php include("./shared/banner_help.php"); // Calls search.php ?>
 
 <script type="text/javascript">
 

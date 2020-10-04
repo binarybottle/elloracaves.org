@@ -1,5 +1,5 @@
 <?php
-	if ( $dbh ){
-       mysql_close($dbh);
+	if ( $link ){
+            mysqli_close($link);
 	}
 ?>
