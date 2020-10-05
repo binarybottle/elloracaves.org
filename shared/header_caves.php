@@ -24,8 +24,9 @@
 
 <?php include("./shared/popup.js"); ?>
 <?php include("./shared/banner_caves.php"); // Calls search.php ?>
+<?php include("../db/elloracaves_db.php"); // Calls search.php ?>
 
-<script type="text/javascript">
+<!--script type="text/javascript">
 
   // Rollover markers in cave plans
 <?php
@@ -46,7 +47,7 @@
 //    }
 ?>
 
-</script>
+</script-->
 
 <script type="text/javascript">
 
@@ -64,6 +65,7 @@
       });';
 */
     // Postload images:
+    $postload = 1;
     if ($postload==1 && strlen($searchcave)>0) {
       $sqlPL = 'SELECT image_file
                 FROM images
@@ -71,6 +73,7 @@
                 AND image_rank = 1';
       $resultPL = mysqli_query($link,$sqlPL) or die (mysql_error());
       // Create JS array: Array('image_1.png', 'image_2.png', 'image_3.png');
+
       $array_string = '';
       $i0 = 0;
       while($rowPL = mysqli_fetch_array($resultPL)){
@@ -129,4 +132,5 @@
 </style>
 
 </head>
+
 <?php flush(); ?>
