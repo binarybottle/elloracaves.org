@@ -232,7 +232,7 @@ if (strlen(trim($searchstring))==0 || strlen($searchimage)>0) {
             $scroll_image_IDs = array();
             $irow2 = 0;
             foreach ($resultIMAGES as $row2) {
-                if ($row2['image_master_ID']==$row['image_master_ID']) {
+               if ($row2['image_master_ID']==$row['image_master_ID']) {
                     $scroll_image_IDs[$irow2] = $row2['image_ID'];
                     if ($row2['image_ID']==$row['image_ID']) {
                         $scroll_image_number = $irow2;
@@ -240,6 +240,7 @@ if (strlen(trim($searchstring))==0 || strlen($searchimage)>0) {
                     $irow2 = $irow2 + 1;
                 }
             }
+/*
             if (sizeof($scroll_image_IDs) > 1) {
                 echo '<span class="'.$active_string2.'caption" style="width:'.$image_width.'px;
                           position:absolute; bottom:-20px; left:0px; font-size:85%;">';
@@ -268,7 +269,7 @@ if (strlen(trim($searchstring))==0 || strlen($searchimage)>0) {
                 }
                 echo '</span>';
             }
-
+*/
             // Caption
             echo '<span class="'.$active_string2.'caption" style="font-size:85%; left:'.$caption_left.'px;">';
                  // overflow:auto; background-color:#000000;">';
