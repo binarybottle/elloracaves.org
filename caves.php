@@ -173,11 +173,14 @@ if (strlen(trim($searchstring))==0 || strlen($searchimage)>0) {
                     $x0 = $X; //$scale_plans*$X;
                     $y0 = $Y; //$scale_plans*$Y;
                     if ($row['image_ID'] == $row['image_master_ID']) {
+
+                        echo '<a href="https://elloracaves.org/caves.php?cmd=search&words=&cave_ID='.$plan_ID.'&plan_floor='.$floor.'&image_ID='.$row["image_ID"].'">';
                         echo '<img src="images/decor/marker_'.$marker_state.'.png"
                             id="marker'.$row["image_ID"].'" rel="target'.$row["image_ID"].'"
                             border="0" width="'.$marker_size.'" height="'.$marker_size.'"
                             style="position:absolute; top:'.$y0.'px; left:'.$x0.'px;" />
                             ';
+                         echo '</a>';
                     } else {
                         echo '<span
                             id="marker'.$row["image_ID"].'" rel="target'.$row["image_ID"].'"
