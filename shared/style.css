@@ -110,20 +110,20 @@ body {
   top: 80px;
   //left: 400px;
   width: 300px;
-  font-size: 85%;
+  font-size: 100%;
 }
 .thumbbox {
   position: relative;
   width: 800px;
   top: 20px;
-  font-size: 90%;
+  font-size: 100%;
 }
 #thumbs {
   position: absolute;
 }
 .thumbnails {
   position: absolute;
-  font-size: 90%;
+  font-size: 100%;
 }
 
 .tiny { 

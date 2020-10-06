@@ -9,6 +9,7 @@ $miniplan_width = 100;
 $image_width = 360;
 $caption_left = 400;
 $thumbs_shift_down = 300; //20;
+$thumbs_shift_right = 135;
 $thumb_height = 100;
 $scale_plans = 0.75;
 $default_plan_width = $scale_plans*480;
@@ -27,8 +28,6 @@ if (strlen($searchcave)==0) {
 if (strlen($searchfloor) == 0) {
   $searchfloor = $default_plan_floor;
 }
-
-//print('SFLOOR= '.$searchfloor);
 
 include("./shared/header_caves.php");
 ?>
@@ -51,7 +50,6 @@ $row = mysqli_fetch_array($result);
 $plan_image_ID = $row['plan_image_ID'];
 $plan_ID = $row['plan_ID'];
 
-
 // Mini floorplans
 // If there is a plan image, mini ground plans
 if ($plan_image_ID > 0 && strlen(trim($searchstring))==0) {
@@ -69,20 +67,17 @@ if ($plan_image_ID > 0 && strlen(trim($searchstring))==0) {
         $i = $i + 1;
     }
 
-    if (sizeof($plan_images) > 1) {
-    } else {
-      // Plan images
-      $sql = "SELECT plan_image
+    // Plan images
+    $sql = "SELECT plan_image
          FROM plans
          WHERE plan_cave_ID = '".$searchcave."'";
-      $result = mysqli_query($link,$sql) or die (mysql_error());
-      // Create plan_images array
-      $plan_images = array();
-      $i=0;
-      while($row = mysqli_fetch_array($result)){
+    $result = mysqli_query($link,$sql) or die (mysql_error());
+    // Create plan_images array
+    $plan_images = array();
+    $i=0;
+    while($row = mysqli_fetch_array($result)){
         $plan_images[$i] = $row;
         $i = $i + 1;
-      }
     }
 
     // Mini-plans
@@ -100,20 +95,21 @@ if ($plan_image_ID > 0 && strlen(trim($searchstring))==0) {
 
 
 // Cave images  
-// If there is a cave_ID, get cave images
+// If there is a cave_ID, get cave images and the number of cave images
 if ($searchcave > 0 && strlen(trim($searchstring))==0) {
-
-    $sql = "SELECT *
-         FROM images
+    $sql = "SELECT * FROM images
          WHERE image_cave_ID = '".$searchcave."'";
     $resultIMAGES = mysqli_query($link,$sql) or die (mysql_error());
-    $num_caves=0;
+    $num_cave_images=0;
     while($row = mysqli_fetch_array($resultIMAGES)){
-        $num_caves = $num_caves + 1;
+        $num_cave_images = $num_cave_images + 1;
     }
+}
+
+// If there is a cave_ID and a $searchimage, get the image:
+if ($searchimage > 0 && strlen(trim($searchstring))==0) {
     $sql = "SELECT image_file
-         FROM images
-         WHERE image_ID = '".$searchimage."'";
+         FROM images WHERE image_ID = '".$searchimage."'";
     $resultIMAGE = mysqli_query($link,$sql) or die (mysql_error());
     $row = mysqli_fetch_array($resultIMAGE);
     $image_file = $row['image_file'];
@@ -122,6 +118,7 @@ if ($searchcave > 0 && strlen(trim($searchstring))==0) {
 
 // Main box (plan, image, caption, thumbnails)
 echo '<div class="mainbox">';
+echo '<br><br><br>';
 echo '<div class="topbox" style="float:left;">';
 
 // Plot plan and main image above thumbnails if no search or if found image
@@ -150,7 +147,7 @@ if (strlen(trim($searchstring))==0 || strlen($searchimage)>0) {
             }
             $plan_size = getimagesize($url);
             $plan_height = $plan_size[1];
-            //$plan_height = $scale_plans * $plan_height;
+            $plan_height = $scale_plans * $plan_height;
             echo '<div>
                   <dl id="switches">
                   ';
@@ -168,13 +165,25 @@ if (strlen(trim($searchstring))==0 || strlen($searchimage)>0) {
                     $marker_state = 'on';
                     $marker_size = 6;
                 }
+
+                // Floor number
+                $sql = "SELECT image_plan_ID FROM images WHERE image_ID = '".$row['image_ID']."'";
+                $resultIPLAN = mysqli_query($link,$sql) or die (mysql_error());
+                $rowIPLAN = mysqli_fetch_array($resultIPLAN);
+                $image_plan_ID = $rowIPLAN['image_plan_ID'];
+
+                $sqlFL = "SELECT plan_floor FROM plans WHERE plan_ID = '".$image_plan_ID."'";
+                $resultFL = mysqli_query($link,$sqlFL) or die (mysql_error());
+                $rowFL = mysqli_fetch_array($resultFL);
+                $plan_floor = $rowFL['plan_floor'];
+
                 // If there is a pair of coordinates for an image, place marker
-                if ($X>0 && $Y>0 && $row['image_plan_ID']==$plan_ID) {
+                if ($X>0 && $Y>0 && $plan_floor==$searchfloor) {
                     $x0 = $X; //$scale_plans*$X;
                     $y0 = $Y; //$scale_plans*$Y;
                     if ($row['image_ID'] == $row['image_master_ID']) {
 
-                        echo '<a href="https://elloracaves.org/caves.php?cmd=search&words=&cave_ID='.$plan_ID.'&plan_floor='.$floor.'&image_ID='.$row["image_ID"].'">';
+                        echo '<a href="https://elloracaves.org/caves.php?cmd=search&words=&cave_ID='.$plan_ID.'&plan_floor='.$plan_floor.'&image_ID='.$row["image_ID"].'">';
                         echo '<img src="images/decor/marker_'.$marker_state.'.png"
                             id="marker'.$row["image_ID"].'" rel="target'.$row["image_ID"].'"
                             border="0" width="'.$marker_size.'" height="'.$marker_size.'"
@@ -192,8 +201,7 @@ if (strlen(trim($searchstring))==0 || strlen($searchimage)>0) {
             echo '</dl></div>';
             echo '</div>';  // planbox
         }
-
-
+        
         // Slide box (main image)
         echo '<div class="slidebox" style="float:left;">';
         echo '<div id="slides">';
@@ -292,9 +300,12 @@ if (strlen(trim($searchstring))==0 || strlen($searchimage)>0) {
 
 
 // Thumb box (thumbnails)
-echo '<div class="thumbbox" style="position:absolute; top:'.($max_height + $thumbs_shift_down).'px;">';
-echo '<br />'.$num_caves.' result';
-if ($num_caves!=1) {
+echo '<div class="thumbbox" style="position:absolute; top:'.($max_height + $thumbs_shift_down).'px; left:'.$thumbs_shift_right.'px;">';
+echo '<br><br><br>';
+echo '<br><br><br>';
+echo '<br><br><br>';
+echo '<br />'.$num_cave_images.' result';
+if ($num_cave_images!=1) {
         echo 's'; 
 }
 if (strlen(trim($searchstring)) > 0) {
