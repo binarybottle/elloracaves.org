@@ -191,8 +191,29 @@ if (strlen(trim($searchstring))==0 || strlen($searchimage)>0) {
 
                 // If there is a pair of coordinates for an image, place marker
                 if ($X>0 && $Y>0 && $plan_floor==$searchfloor) {
-                    $x0 = $X; //$scale_plans*$X;
-                    $y0 = $Y; //$scale_plans*$Y;
+                    //echo $image_plan_ID;
+		    if ($image_plan_ID == 124 || $image_plan_ID == 30 || $image_plan_ID == 130 || $image_plan_ID == 34) {
+                        $x0 = $scale_plans*$X;
+                        $y0 = $scale_plans*$Y;
+		    } else if ($image_plan_ID == 2) {
+                        $x0 = $X*0.68;
+                        $y0 = $Y*0.68;
+		    } else if ($image_plan_ID == 32) {
+                        $x0 = $X*0.69;
+                        $y0 = $Y*0.69;
+		    } else if ($image_plan_ID == 232) {
+                        $x0 = $X*0.96;
+                        $y0 = $Y*0.96;
+		    } else if ($image_plan_ID == 132) {
+                        $x0 = $X*0.87;
+                        $y0 = $Y*0.87;
+                    } else if ($image_plan_ID == 10008) {
+                        $x0 = $X*0.55 + 215;
+                        $y0 = $Y*0.55 - 205;
+                    } else {
+		        $x0 = $X; 
+                        $y0 = $Y;
+		    }
                     if ($row_resultIMAGE['image_ID'] == $row_resultIMAGE['image_master_ID']) {
 
                         echo '<a href="https://elloracaves.org/caves.php?cmd=search&words=&cave_ID='.$plan_ID.'&plan_floor='.$plan_floor.'&image_ID='.$row_resultIMAGE["image_ID"].'">';
