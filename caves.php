@@ -107,10 +107,9 @@ if ($searchcave > 0 && strlen(trim($searchstring))==0) {
 }
 
 // If there is a cave_ID and a $searchimage, get the image:
-echo '<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.$searchimage.' &  '.$searchstring;
 if ($searchimage > 0) {
 } else {
-    $sql = "SELECT image_master_ID FROM images WHERE image_cave_ID = ".$searchcave;
+    $sql = "SELECT image_master_ID FROM images WHERE image_cave_ID = '".$searchcave."' AND image_rank > 0";
     $resultIMAGE = mysqli_query($link,$sql) or die (mysql_error());
     $row_resultIMAGE = mysqli_fetch_array($resultIMAGE);
     $searchimage = $row_resultIMAGE['image_master_ID'];
@@ -337,6 +336,11 @@ echo ':<br />';
 
 // Thumbnails
 foreach ($resultIMAGES as $rowI) {
+
+    if (is_file('images/caves_360px/'.$rowI['image_file'])) {
+
+//    if ($rowI['image_rank']!=0) {
+
         echo '<span id="thumb_'.$rowI["image_ID"].'">';
         echo '<a href="https://elloracaves.org/caves.php?cmd=search&words='.$searchstring;
         echo '&cave_ID='.$searchcave.'&plan_floor='.$searchfloor.'&image_ID='.$rowI['image_ID'].'">';
@@ -347,10 +351,13 @@ foreach ($resultIMAGES as $rowI) {
             $border_width = 0;
         }
         echo '<img src="' . $thumb_dir . $rowI['image_file'] . '" height="'.$thumb_height.'" border="'.$border_width.'"/></a>';
+        //echo $rowI['image_ID']." ".$rowI['image_rank'];
+        //echo $rowI['image_ID'];
         echo ' ';
         echo '</span>';
-} 
-    
+//    }
+    }
+}    
 echo '</div>';  // thumbbox
 echo '</div>';  // mainbox
 
