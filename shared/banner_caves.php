@@ -12,7 +12,8 @@
 </div>
 
 <!-- Search -->
-
+<!--?php include("./shared/search_caves.php"); ?-->
+<!--?php include("./shared/cave_menu.php"); ?-->
 
 <!-- Cave numbers -->
 <div class="cavenumbers">
